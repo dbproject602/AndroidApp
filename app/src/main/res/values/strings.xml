@@ -1,9 +1,20 @@
 <resources>
+    <string name="MainActivity">0</string>
+    <string name="ArroundActivity">1</string>
+    <string name="OrderActivity">2</string>
+    <string name="AccountActivity">3</string>
+    <string name="r_chinese">中餐馆</string>
+    <string name="r_west">西餐馆</string>
+    <string name="r_fast">快餐</string>
+    <string name="r_japanese">日料</string>
     <string name="app_name">DB_Project</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_order">OrderActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">待处理订单</string>
+    <string name="tab_text_2">全部订单</string>
+    <string name="tab_text_3">历史订单</string>
+    <string name="title_around">周围</string>
+    <string name="title_home">主页</string>
+    <string name="title_order">订单</string>
+    <string name="title_account">账户</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
