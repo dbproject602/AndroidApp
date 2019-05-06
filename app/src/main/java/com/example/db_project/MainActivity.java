@@ -16,10 +16,13 @@ public class MainActivity extends NavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setcurrent_Activity(R.string.MainActivity,this);
+        init_home();
+    }
+    @Override
+    void init_home(){
+        setcurrent_Activity(0,this);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
     }
 }

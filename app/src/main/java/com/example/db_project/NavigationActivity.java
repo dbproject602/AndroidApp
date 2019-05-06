@@ -18,19 +18,14 @@ import com.example.db_project.ui.main.SectionsPagerAdapter;
 
 public abstract class NavigationActivity extends AppCompatActivity {
 
-    private static int current_Activity = 0;
-    private static Activity cur_activity;
+    static int current_Activity = 0;
+    static Activity cur_activity;
     void setcurrent_Activity(int activity,Activity act){
         current_Activity = activity;
         cur_activity = act;
     }
 
-    private void init_home(){
-        setcurrent_Activity(0,cur_activity);
-        setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+    abstract void init_home();
 
     private void init_arrount(){
         setcurrent_Activity(1,cur_activity);

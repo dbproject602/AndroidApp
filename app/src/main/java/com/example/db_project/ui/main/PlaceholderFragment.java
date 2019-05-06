@@ -49,7 +49,6 @@ public class PlaceholderFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
         final TextView textView = root.findViewById(R.id.section_label);
-        final LinearLayout linearLayout = root.findViewById(R.id.order_layout);
         pageViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
