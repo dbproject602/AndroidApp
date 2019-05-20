@@ -27,36 +27,11 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
     abstract void init_home();
 
-    private void init_arrount(){
-        setcurrent_Activity(1,cur_activity);
-        SDKInitializer.initialize(getApplicationContext());
-        setContentView(R.layout.activity_map);
-        MapView mv = (MapView) findViewById(R.id.mv);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setSelectedItemId(navView.getMenu().getItem(1).getItemId());
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+    abstract void init_arrount();
 
-    private void init_order(){
-        setcurrent_Activity(2,cur_activity);
-        setContentView(R.layout.activity_order);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(cur_activity, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setSelectedItemId(navView.getMenu().getItem(2).getItemId());
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+    abstract void init_order();
 
-    private void init_account(){
-        setcurrent_Activity(3,cur_activity);
-        setContentView(R.layout.activity_account);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setSelectedItemId(navView.getMenu().getItem(3).getItemId());
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+    abstract void init_account();
 
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
