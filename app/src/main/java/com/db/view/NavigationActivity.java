@@ -1,4 +1,4 @@
-package com.view;
+package com.db.view;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;

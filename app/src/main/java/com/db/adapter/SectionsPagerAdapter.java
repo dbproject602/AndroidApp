@@ -1,4 +1,4 @@
-package com.adapter;
+package com.db.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.activity.R;
-import com.fragment.PlaceholderFragment;
+import com.db.fragment.PlaceholderFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

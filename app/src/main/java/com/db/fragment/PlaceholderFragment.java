@@ -1,4 +1,4 @@
-package com.fragment;
+package com.db.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 
 import com.example.activity.R;
-import com.viewmodel.PageViewModel;
+import com.db.viewmodel.PageViewModel;
 
 /**
  * A placeholder fragment containing a simple view.

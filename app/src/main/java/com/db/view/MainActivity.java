@@ -1,4 +1,4 @@
-package com.view;
+package com.db.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.support.v4.view.ViewPager;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 import com.example.activity.R;
-import com.adapter.SectionsPagerAdapter;
+import com.db.adapter.SectionsPagerAdapter;
 
 import java.util.ArrayList;
 

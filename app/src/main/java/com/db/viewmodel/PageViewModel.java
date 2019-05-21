@@ -1,4 +1,4 @@
-package com.viewmodel;
+package com.db.viewmodel;
 
 import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
