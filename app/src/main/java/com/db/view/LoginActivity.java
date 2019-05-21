@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 progressBar.setVisibility(View.GONE);
                 startActivity(intent);
+                finish();
             }
         };
         model.getUserinfo().observe(this,userinfoBeanObserver);
