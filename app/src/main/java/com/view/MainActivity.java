@@ -1,4 +1,4 @@
-package com.example.db_project;
+package com.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -10,17 +10,22 @@ import android.support.v4.view.ViewPager;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
-import com.example.db_project.ui.main.SectionsPagerAdapter;
+import com.example.activity.R;
+import com.adapter.SectionsPagerAdapter;
+
+import java.util.ArrayList;
+
+import bean.FoodBean;
 
 public class MainActivity extends NavigationActivity {
-    String message = "";
+
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            message = msg.obj.toString();
-            System.out.println(message);
+            ArrayList<FoodBean> temp = (ArrayList<FoodBean>)msg.obj;
+            System.out.println(temp.get(0).getName());
         }
     };
 

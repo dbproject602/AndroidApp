@@ -1,11 +1,9 @@
-package com.example.db_project.ui.main;
+package com.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.annotation.Nullable;
 import android.support.annotation.NonNull;
@@ -13,7 +11,8 @@ import android.support.v4.app.Fragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 
-import com.example.db_project.R;
+import com.example.activity.R;
+import com.viewmodel.PageViewModel;
 
 /**
  * A placeholder fragment containing a simple view.

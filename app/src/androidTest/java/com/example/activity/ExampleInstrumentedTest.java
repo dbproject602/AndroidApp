@@ -1,4 +1,4 @@
-package com.example.db_project;
+package com.example.activity;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

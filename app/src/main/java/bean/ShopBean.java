@@ -1,23 +1,23 @@
-package com.example.db_project.data;
+package bean;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Shopinfo {
+public class ShopBean implements Serializable {
     private String name;
     private double x_loc;
     private double y_loc;
     private double rate;
     private String location;
-    private int phone_number;
+    private int phone;
    // private Url ImageUrl;
 
-    public Shopinfo(String name, double x_loc, double y_loc, double rate, String location, int phone_number) {
+    public ShopBean(String name, double x_loc, double y_loc, double rate, String location, int phone) {
         this.name = name;
         this.x_loc = x_loc;
         this.y_loc = y_loc;
         this.rate = rate;
         this.location = location;
-        this.phone_number = phone_number;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -60,12 +60,12 @@ public class Shopinfo {
         this.location = location;
     }
 
-    public int getPhone_number() {
-        return phone_number;
+    public int getPhone() {
+        return phone;
     }
 
-    public void setPhone_number(int phone_number) {
-        this.phone_number = phone_number;
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 }
 

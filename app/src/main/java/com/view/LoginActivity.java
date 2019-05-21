@@ -1,7 +1,9 @@
-package com.example.db_project;
+package com.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.activity.R;
 
 public class LoginActivity extends AppCompatActivity {
 
