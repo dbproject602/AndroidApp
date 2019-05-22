@@ -36,8 +36,12 @@ public class HttpManager {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         }).start();
     }
+    public static void update(){
+
+    };
 
 }

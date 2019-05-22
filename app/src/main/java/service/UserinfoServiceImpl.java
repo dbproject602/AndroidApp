@@ -11,4 +11,8 @@ public class UserinfoServiceImpl implements UserinfoService {
     public void login(String account, String password, Handler handler) throws Exception {
         userinfoDao.login(account,password,handler);
     }
+    @Override
+    public void register(String account,String password,Handler handler) throws Exception{
+        userinfoDao.register(account,password,handler);
+    }
 }

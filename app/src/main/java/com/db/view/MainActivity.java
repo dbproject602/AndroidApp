@@ -1,39 +1,54 @@
 package com.db.view;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.SearchView;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.Poi;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
+import com.db.viewmodel.AccountPageViewModel;
+import com.db.viewmodel.HomePageViewModel;
+import com.db.viewmodel.LoginViewModel;
 import com.example.activity.R;
 import com.db.adapter.SectionsPagerAdapter;
 
 import java.util.ArrayList;
 
 import bean.FoodBean;
+import util.LocationManager;
 
 public class MainActivity extends NavigationActivity {
-
-    @SuppressLint("HandlerLeak")
-    Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            ArrayList<FoodBean> temp = (ArrayList<FoodBean>)msg.obj;
-            System.out.println(temp.get(0).getName());
-        }
-    };
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locationManager = new LocationManager(this);
+        locationManager.registerListener(mListener);
+        locationManager.setLocationOption(locationManager.getDefaultLocationClientOption());
         init_home();
+        locationManager.start();
+
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        locationManager.unregisterListener(mListener); //注销掉监听
+        locationManager.stop(); //停止定位服务
+    }
+
 
     @Override
     void init_home(){
@@ -41,6 +56,13 @@ public class MainActivity extends NavigationActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Button china_btn = findViewById(R.id.r_chinese);
+        Button west_btn = findViewById(R.id.r_west);
+        Button fast_btn = findViewById(R.id.r_fast);
+        Button janpan_btn = findViewById(R.id.r_chinese);
+        SearchView searchView = findViewById(R.id.searchView);
+        final HomePageViewModel model = ViewModelProviders.of(this).get(HomePageViewModel.class);
+
     }
 
 
@@ -53,6 +75,8 @@ public class MainActivity extends NavigationActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(1).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        final AccountPageViewModel model = ViewModelProviders.of(this).get(AccountPageViewModel.class);
+
     }
 
     @Override
@@ -76,5 +100,31 @@ public class MainActivity extends NavigationActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(3).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        final AccountPageViewModel model = ViewModelProviders.of(this).get(AccountPageViewModel.class);
+
     }
+
+    private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // TODO Auto-generated method stub
+            if (null != location && location.getLocType() != BDLocation.TypeServerError) {
+                StringBuilder sb = new StringBuilder(256);
+
+                sb.append("\nlatitude : ");// 纬度
+                sb.append(location.getLatitude());
+                sb.append("\nlontitude : ");// 经度
+                sb.append(location.getLongitude());
+
+                sb.append("\naddr : ");// 地址信息
+                sb.append(location.getAddrStr());
+
+                System.out.println(sb);
+            }
+        }
+
+    };
+
+
 }
