@@ -40,8 +40,5 @@ public class HttpManager {
             }
         }).start();
     }
-    public static void update(){
-
-    };
 
 }

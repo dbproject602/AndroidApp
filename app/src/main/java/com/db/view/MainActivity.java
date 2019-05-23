@@ -111,12 +111,10 @@ public class MainActivity extends NavigationActivity {
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 StringBuilder sb = new StringBuilder(256);
-
                 sb.append("\nlatitude : ");// 纬度
                 sb.append(location.getLatitude());
                 sb.append("\nlontitude : ");// 经度
                 sb.append(location.getLongitude());
-
                 sb.append("\naddr : ");// 地址信息
                 sb.append(location.getAddrStr());
 

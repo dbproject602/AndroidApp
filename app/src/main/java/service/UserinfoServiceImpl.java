@@ -2,6 +2,7 @@ package service;
 
 import android.os.Handler;
 
+import bean.UserinfoBean;
 import dao.UserinfoDao;
 import dao.UserinfoDaoImpl;
 
@@ -12,7 +13,7 @@ public class UserinfoServiceImpl implements UserinfoService {
         userinfoDao.login(account,password,handler);
     }
     @Override
-    public void register(String account,String password,Handler handler) throws Exception{
-        userinfoDao.register(account,password,handler);
+    public void register(UserinfoBean userinfoBean, Handler handler) throws Exception{
+        userinfoDao.register(userinfoBean ,handler);
     }
 }
