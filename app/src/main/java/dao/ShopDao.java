@@ -2,9 +2,10 @@ package dao;
 
 import android.os.Handler;
 
+import java.util.List;
+
+import bean.ShopBean;
+
 public interface ShopDao {
-    void searchShopbyShopname(String shopname, Handler handler) throws Exception;
-    void searchShopbyType(String type, Handler handler) throws Exception;
-
-
+    List<ShopBean> fetchShopList(int shopType) throws Exception;
 }

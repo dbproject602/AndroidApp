@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.db.viewmodel.LoginViewModel;
 import com.example.activity.R;
 
-import bean.UserinfoBean;
+import bean.UserBean;
 
 public class LoginActivity extends AppCompatActivity {
     @Override
@@ -37,16 +37,16 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
             }
         });
-        final Observer<UserinfoBean> userinfoBeanObserver = new Observer<UserinfoBean>() {
+        final Observer<UserBean> userBeanObserver = new Observer<UserBean>() {
             @Override
-            public void onChanged(@Nullable UserinfoBean userinfoBean) {
+            public void onChanged(@Nullable UserBean userinfoBean) {
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 progressBar.setVisibility(View.GONE);
                 startActivity(intent);
                 finish();
             }
         };
-        model.getUserinfo().observe(this,userinfoBeanObserver);
+        model.getUser().observe(this,userBeanObserver);
     }
 
 }

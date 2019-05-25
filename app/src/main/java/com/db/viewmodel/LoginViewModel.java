@@ -4,56 +4,50 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
-import com.db.view.LoginActivity;
-
-import java.util.ArrayList;
-
-import bean.FoodBean;
-import bean.UserinfoBean;
-import service.UserinfoService;
-import service.UserinfoServiceImpl;
+import bean.UserBean;
+import service.UserService;
+import service.UserServiceImpl;
 
 public class LoginViewModel extends ViewModel {
-    private MutableLiveData<UserinfoBean> userinfo = new MutableLiveData<>();
-    private String account = "";
+    private MutableLiveData<UserBean> user = new MutableLiveData<>();
+    private String username = "";
     private String password = "";
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            userinfo.postValue((UserinfoBean) msg.obj);
+            user.postValue((UserBean) msg.obj);
         }
     };
     public LoginViewModel(){
 
     }
     public int login(String account, String password) throws Exception{
-        UserinfoService userinfoService = new UserinfoServiceImpl();
-        userinfoService.login(account,password,handler);
+        UserService userService = new UserServiceImpl();
+        userService.login(account,password,handler);
 
         return 0;
     }
 
-    public LiveData<UserinfoBean> getUserinfo() {
-        return userinfo;
+    public LiveData<UserBean> getUser() {
+        return user;
     }
 
-    public void setUserinfo(UserinfoBean userinfo){
-        this.userinfo =  new MutableLiveData<UserinfoBean>();
-        this.userinfo.setValue(userinfo);
+    public void setUser(UserBean user){
+        this.user =  new MutableLiveData<UserBean>();
+        this.user.setValue(user);
     }
 
     public String getAccount() {
-        return account;
+        return username;
     }
 
     public void setAccount(String account) {
-        this.account = account;
+        this.username = account;
     }
 
     public String getPassword() {
