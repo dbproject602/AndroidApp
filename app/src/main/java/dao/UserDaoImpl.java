@@ -25,4 +25,15 @@ public class UserDaoImpl implements UserDao {
         RequestBody requestBody = new FormBody.Builder().add("userBean",str).build();
         HttpManager.send(requestBody,servlet,handler);
     }
+
+    @Override
+    public int updateUser(UserBean userBean) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public int deleteUserbyId(int userId) throws Exception {
+        return 0;
+    }
+
 }
