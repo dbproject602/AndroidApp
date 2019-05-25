@@ -17,24 +17,41 @@ import com.example.activity.R;
 import bean.UserBean;
 
 public class LoginActivity extends AppCompatActivity {
+    private EditText userNameview;
+    private EditText passwordview;
+    private ProgressBar progressBar;
+    private LoginViewModel loginViewModel;
+    private Button loginbtn;
+    private Button registerbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Button loginbtn = findViewById(R.id.login);
-        final EditText accountview = findViewById(R.id.username);
-        final EditText passwordview = findViewById(R.id.password);
-        final ProgressBar progressBar = findViewById(R.id.loading);
-        final LoginViewModel model = ViewModelProviders.of(this).get(LoginViewModel.class);
+        loginbtn = findViewById(R.id.login);
+        registerbtn = findViewById(R.id.register);
+        userNameview = findViewById(R.id.username);
+        passwordview = findViewById(R.id.password);
+        progressBar = findViewById(R.id.loading);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 try {
-                    model.login(accountview.getText().toString(),passwordview.getText().toString());
+                    loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+        registerbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.open,
+                        R.anim.close);
+                finish();
             }
         });
         final Observer<UserBean> userBeanObserver = new Observer<UserBean>() {
@@ -43,10 +60,12 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 progressBar.setVisibility(View.GONE);
                 startActivity(intent);
+                overridePendingTransition(R.anim.open,
+                        R.anim.close);
                 finish();
             }
         };
-        model.getUser().observe(this,userBeanObserver);
+        loginViewModel.getUserBean().observe(this,userBeanObserver);
     }
 
 }

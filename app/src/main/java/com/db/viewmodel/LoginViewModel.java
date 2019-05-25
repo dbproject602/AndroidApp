@@ -12,7 +12,7 @@ import service.UserService;
 import service.UserServiceImpl;
 
 public class LoginViewModel extends ViewModel {
-    private MutableLiveData<UserBean> user = new MutableLiveData<>();
+    private MutableLiveData<UserBean> userBean = new MutableLiveData<>();
     private String username = "";
     private String password = "";
     @SuppressLint("HandlerLeak")
@@ -20,12 +20,9 @@ public class LoginViewModel extends ViewModel {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            user.postValue((UserBean) msg.obj);
+            userBean.postValue((UserBean) msg.obj);
         }
     };
-    public LoginViewModel(){
-
-    }
     public int login(String account, String password) throws Exception{
         UserService userService = new UserServiceImpl();
         userService.login(account,password,handler);
@@ -33,13 +30,13 @@ public class LoginViewModel extends ViewModel {
         return 0;
     }
 
-    public LiveData<UserBean> getUser() {
-        return user;
+    public LiveData<UserBean> getUserBean() {
+        return userBean;
     }
 
-    public void setUser(UserBean user){
-        this.user =  new MutableLiveData<UserBean>();
-        this.user.setValue(user);
+    public void setUserBean(UserBean userBean){
+        this.userBean =  new MutableLiveData<UserBean>();
+        this.userBean.setValue(userBean);
     }
 
     public String getAccount() {

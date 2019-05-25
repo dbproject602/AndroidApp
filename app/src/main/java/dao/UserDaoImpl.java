@@ -11,9 +11,9 @@ import util.ObjToBytes;
 public class UserDaoImpl implements UserDao {
 
     @Override
-    public void fetchUser(String username, String password, Handler handler) throws Exception {
+    public void fetchUser(String userName, String password, Handler handler) throws Exception {
         String servlet = "LoginServlet";
-        RequestBody requestBody = new FormBody.Builder().add("username",username).add("password",password).build();
+        RequestBody requestBody = new FormBody.Builder().add("username",userName).add("password",password).build();
         HttpManager.send(requestBody,servlet,handler);
     }
     @Override

@@ -12,7 +12,9 @@ import util.HttpManager;
 public class ShopDaoImpl implements ShopDao {
 
     @Override
-    public List<ShopBean> fetchShopList(int shopType) throws Exception {
-        return null;
+    public void fetchShopList(int shopType,Handler handler) throws Exception {
+        String servlet = "FetchShopListServlet";
+        RequestBody requestBody = new FormBody.Builder().add("shoptype",String.valueOf(shopType)).build();
+        HttpManager.send(requestBody,servlet,handler);
     }
 }
