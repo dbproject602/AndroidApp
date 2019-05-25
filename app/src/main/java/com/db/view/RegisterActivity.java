@@ -43,8 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_out,
-                        R.anim.slide_in);
                 finish();
             }
         });

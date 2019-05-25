@@ -29,7 +29,6 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name="com.db.view.LauncherActivity"
-            android:label="@string/title_activity_launcher"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

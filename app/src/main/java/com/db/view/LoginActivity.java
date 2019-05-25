@@ -25,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button registerbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        overridePendingTransition(R.anim.fade_out,
-                R.anim.fade_in);
+        overridePendingTransition(R.anim.slide_out,
+                R.anim.slide_in);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         loginbtn = findViewById(R.id.login);
