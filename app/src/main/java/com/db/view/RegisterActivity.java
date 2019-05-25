@@ -4,14 +4,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
-import com.db.viewmodel.LoginViewModel;
 import com.db.viewmodel.RegisterViewModel;
 import com.example.activity.R;
 
@@ -45,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.open,
-                        R.anim.close);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
                 finish();
             }
         });

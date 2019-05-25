@@ -27,4 +27,5 @@
     <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="title_activity_maps">Map</string>
     <string name="LoginServlet">http://10.21.99.25:8080/LoginServlet</string>
+    <string name="title_activity_launcher">LauncherActivity</string>
 </resources>

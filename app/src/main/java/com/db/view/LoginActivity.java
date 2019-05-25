@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button registerbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.anim.fade_out,
+                R.anim.fade_in);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         loginbtn = findViewById(R.id.login);
@@ -49,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.open,
-                        R.anim.close);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
                 finish();
             }
         });
@@ -60,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 progressBar.setVisibility(View.GONE);
                 startActivity(intent);
-                overridePendingTransition(R.anim.open,
-                        R.anim.close);
+                overridePendingTransition(R.anim.fade_out,
+                        R.anim.fade_in);
                 finish();
             }
         };
