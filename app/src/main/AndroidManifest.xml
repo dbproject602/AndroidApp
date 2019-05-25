@@ -27,23 +27,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.db.view.RegisterActivity"></activity>
-        <activity android:name="com.db.view.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name="com.db.view.ShopActivity"
+                  android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name="com.db.view.ResultActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name="com.db.view.RegisterActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name="com.db.view.LoginActivity"
+                  android:screenOrientation="portrait"
+            >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.db.view.MainActivity"
-            android:label="@string/app_name"></activity>
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-        <service
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+
+     <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
-
+            android:process=":remote" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="bvqgbS8CcYTvOgTFMEMmHuNbXeF0m89W" />

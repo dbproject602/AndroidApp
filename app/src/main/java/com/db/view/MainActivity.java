@@ -42,6 +42,7 @@ public class MainActivity extends NavigationActivity {
 
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button loginbtn = findViewById(R.id.login);
-        final EditText accountview = findViewById(R.id.account);
+        final EditText accountview = findViewById(R.id.username);
         final EditText passwordview = findViewById(R.id.password);
         final ProgressBar progressBar = findViewById(R.id.loading);
         final LoginViewModel model = ViewModelProviders.of(this).get(LoginViewModel.class);

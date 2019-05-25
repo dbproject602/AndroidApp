@@ -12,4 +12,5 @@ public class FoodDaoImpl implements FoodDao {
         HttpManager.send(requestBody,servlet,handler);
     }
 
+
 }

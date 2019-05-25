@@ -23,11 +23,6 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
-            <com.bin.david.form.core.SmartTable
-                android:id="@+id/table"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
