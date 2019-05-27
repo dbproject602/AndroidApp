@@ -47,6 +47,7 @@ import java.util.ArrayList;
 
 import bean.FoodBean;
 import bean.UserBean;
+import util.IOUtil;
 import util.LocationManager;
 
 public class MainActivity extends NavigationActivity {
@@ -64,6 +65,8 @@ public class MainActivity extends NavigationActivity {
     private Button information;
     private Button logout;
     private BottomNavigationView navView;
+    private String FILENAME = "userBean.dat";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,11 +94,15 @@ public class MainActivity extends NavigationActivity {
         Button janpan_btn = findViewById(R.id.r_japanese);
         SearchView searchView = findViewById(R.id.searchView);
         final HomePageViewModel model = ViewModelProviders.of(this).get(HomePageViewModel.class);
-        final ShopViewModel shopmodel = ViewModelProviders.of(this).get(ShopViewModel.class);
+        try {
+            IOUtil.writeFileDataTobytes(FILENAME,AccountPageViewModel.getUserBean(),this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         china_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(1);
+                ShopViewModel.setShoptype(1);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -105,7 +112,7 @@ public class MainActivity extends NavigationActivity {
         west_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(2);
+                ShopViewModel.setShoptype(2);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -115,7 +122,7 @@ public class MainActivity extends NavigationActivity {
         fast_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(3);
+                ShopViewModel.setShoptype(3);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -125,7 +132,7 @@ public class MainActivity extends NavigationActivity {
         janpan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(4);
+                ShopViewModel.setShoptype(4);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -210,6 +217,17 @@ public class MainActivity extends NavigationActivity {
         navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(3).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    IOUtil.writeFileDataTobytes(FILENAME,null,MainActivity.this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finish();
+            }
+        });
         final AccountPageViewModel model = ViewModelProviders.of(this).get(AccountPageViewModel.class);
 
     }

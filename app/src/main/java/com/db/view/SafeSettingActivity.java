@@ -11,9 +11,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import com.db.viewmodel.AccountPageViewModel;
 import com.db.viewmodel.RegisterViewModel;
 import com.db.viewmodel.SafeSettingViewModel;
 import com.example.activity.R;
+
+import util.IOUtil;
 
 public class SafeSettingActivity extends AppCompatActivity {
     private ImageButton backbtn;
@@ -26,6 +29,7 @@ public class SafeSettingActivity extends AppCompatActivity {
     private Button register;
     private ProgressBar loading;
     private SafeSettingViewModel safeSettingViewModel;
+    private String FILENAME = "userBean.dat";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +73,16 @@ public class SafeSettingActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Integer flag) {
                 if(flag != 0) {
+                    AccountPageViewModel.setUserBean(safeSettingViewModel.getUserBean().getValue());
+                    try {
+                        IOUtil.writeFileDataTobytes(FILENAME,safeSettingViewModel.getUserBean().getValue(),SafeSettingActivity.this);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     finish();
                     overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
                 }else{
+                    safeSettingViewModel.setUserBean(AccountPageViewModel.getUserBean());
                     loading.setVisibility(View.GONE);
                     System.out.println("error");
                 }
