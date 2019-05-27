@@ -33,8 +33,8 @@ public class ShopViewModel extends ViewModel {
         return shoptype;
     }
 
-    public void setShoptype(int shoptype) {
-        this.shoptype = shoptype;
+    public static void setShoptype(int shop) {
+        shoptype = shop;
     }
 
     public LiveData<List<ShopBean>> getShopBeanList() {

@@ -1,7 +1,9 @@
 package util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class ObjToBytes {
@@ -27,5 +29,16 @@ public class ObjToBytes {
         objOut.writeObject(obj);
         String str = byteOut.toString("ISO-8859-1");//此处只能是ISO-8859-1,但是不会影响中文使用
         return str;
+    }
+    public static Object bytestoobj(byte[] bytes) throws IOException {
+        ByteArrayInputStream byteinput = new ByteArrayInputStream(bytes);
+        ObjectInputStream bitmap = new ObjectInputStream(byteinput);
+        Object result = null;
+        try {
+            result = bitmap.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
