@@ -70,10 +70,18 @@ public class ShopActivity extends AppCompatActivity {
       //  linearLayout.setOrientation(LinearLayout.HORIZONTAL);
        // linearLayout.setPadding(ViewUtil.dip2px(context,5),ViewUtil.dip2px(context,5), ViewUtil.dip2px(context,5),ViewUtil.dip2px(context,5));
       //  LinearLayout.LayoutParams LL_LP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        TextView textView = new TextView(this);
-        textView.setText(shopBean.getShopName());
+
         CardView cardView = new CardView(this);
-        cardView.addView(textView);
+        TextView foodName = new TextView(this);
+        foodName.setText(shopBean.getShopName());
+        foodName.setTextSize(18);
+        cardView.addView(foodName);
+
+        TextView address = new TextView(this);
+        address.setText(shopBean.getAddress());
+        address.setTextSize(10);
+        cardView.addView(address);
+
         cardView.setLayoutParams(new CardView.LayoutParams(
                 CardView.LayoutParams.MATCH_PARENT,   // width
                200)); // height
@@ -81,6 +89,18 @@ public class ShopActivity extends AppCompatActivity {
         cardView.setElevation(5);
         cardView.setPadding(0, 20, 10, 0);
         cardView.setCardBackgroundColor(0);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShopActivity.this,FoodActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
+                finish();
+            }
+        });
+
         return cardView;
     }
 
