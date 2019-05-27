@@ -49,6 +49,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
                     if(current_Activity==2){
                         return true;
                     }else {
+                        System.out.println("test");
                         init_order();
                         return  true;
                     }

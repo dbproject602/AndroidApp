@@ -2,6 +2,7 @@ package com.db.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 
@@ -20,6 +22,7 @@ import com.baidu.mapapi.map.MapView;
 import com.db.viewmodel.AccountPageViewModel;
 import com.db.viewmodel.HomePageViewModel;
 import com.db.viewmodel.LoginViewModel;
+import com.db.viewmodel.ShopViewModel;
 import com.example.activity.R;
 import com.db.adapter.SectionsPagerAdapter;
 
@@ -63,7 +66,47 @@ public class MainActivity extends NavigationActivity {
         Button janpan_btn = findViewById(R.id.r_chinese);
         SearchView searchView = findViewById(R.id.searchView);
         final HomePageViewModel model = ViewModelProviders.of(this).get(HomePageViewModel.class);
-
+        final ShopViewModel shopmodel = ViewModelProviders.of(this).get(ShopViewModel.class);
+        china_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
+                finish();
+            }
+        });
+        west_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
+                finish();
+            }
+        });
+        fast_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
+                finish();
+            }
+        });
+        janpan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
+                finish();
+            }
+        });
     }
 
 

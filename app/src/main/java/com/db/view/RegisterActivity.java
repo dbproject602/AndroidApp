@@ -1,7 +1,9 @@
 package com.db.view;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.ProgressBar;
 
 import com.db.viewmodel.RegisterViewModel;
 import com.example.activity.R;
+
+import bean.UserBean;
 
 public class RegisterActivity extends AppCompatActivity {
     private ImageButton backbtn;
@@ -64,7 +68,26 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        final Observer<Integer> flagObserver = new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer flag) {
+                if(flag != 0) {
+                    startLogin();
+                }else{
+                    System.out.println("error");
+                }
+            }
+        };
+        registerViewModel.getFlag().observe(this,flagObserver);
 
+    }
+    public void startLogin(){
+        Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+        loading.setVisibility(View.GONE);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_out,
+                R.anim.slide_in);
+        finish();
     }
 
 }

@@ -1,6 +1,9 @@
 package dao;
 
 import android.os.Handler;
+import android.util.Base64;
+
+import java.util.Arrays;
 
 import bean.UserBean;
 import okhttp3.FormBody;
@@ -19,11 +22,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addUser(UserBean userBean, Handler handler) throws Exception{
         String servlet = "RegisterServlet";
-        byte[] bytes = null;
-        bytes = ObjToBytes.objtobytes(userBean);
-        String str = new String(bytes,"ISO-8859-1");
+        byte[] bytes = ObjToBytes.objtobytes(userBean);
+        String str = Base64.encodeToString(bytes,Base64.DEFAULT);
         RequestBody requestBody = new FormBody.Builder().add("userBean",str).build();
-        HttpManager.send(requestBody,servlet,handler);
+        HttpManager.update(requestBody,servlet,handler);
     }
 
     @Override

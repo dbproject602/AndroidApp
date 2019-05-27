@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 try {
                     loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
+                    startMain();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -59,15 +60,17 @@ public class LoginActivity extends AppCompatActivity {
         final Observer<UserBean> userBeanObserver = new Observer<UserBean>() {
             @Override
             public void onChanged(@Nullable UserBean userinfoBean) {
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                progressBar.setVisibility(View.GONE);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_out,
-                        R.anim.fade_in);
-                finish();
+                startMain();
             }
         };
         loginViewModel.getUserBean().observe(this,userBeanObserver);
     }
-
+    public void startMain(){
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        progressBar.setVisibility(View.GONE);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_out,
+                R.anim.fade_in);
+        finish();
+    }
 }
