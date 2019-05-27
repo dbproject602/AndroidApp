@@ -37,11 +37,9 @@ public class ShopActivity extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShopActivity.this,MainActivity.class);
-                startActivity(intent);
+                finish();
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
-                finish();
             }
         });
         final Observer<List<ShopBean>> ShopObserver = new Observer<List<ShopBean>>() {

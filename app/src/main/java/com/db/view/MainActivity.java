@@ -100,7 +100,6 @@ public class MainActivity extends NavigationActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
-                finish();
             }
         });
         west_btn.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +110,6 @@ public class MainActivity extends NavigationActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
-                finish();
             }
         });
         fast_btn.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +120,6 @@ public class MainActivity extends NavigationActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
-                finish();
             }
         });
         janpan_btn.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +130,6 @@ public class MainActivity extends NavigationActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
-                finish();
             }
         });
     }
@@ -206,7 +202,9 @@ public class MainActivity extends NavigationActivity {
         information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this,SafeSettingActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
             }
         });
         navView = findViewById(R.id.nav_view);

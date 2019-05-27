@@ -5,6 +5,7 @@ import bean.FoodBean;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderBean implements Serializable {
     private int orderId;
@@ -13,18 +14,17 @@ public class OrderBean implements Serializable {
     private int senderId;
     private Date startTime;
     private Date endTime;
-    private ArrayList<FoodBean> foodItems;
+    private List<FoodBean> foodItems;
     private String status; //需要记录Order的状态，三个状态已下单，派送中，结单
 
-    public OrderBean(int orderId, int userId, int shopId, int senderId, Date startTime, Date endTime, ArrayList<FoodBean> items,String status) {
-        this.orderId = orderId;
+    public OrderBean( int userId, int shopId, List<FoodBean> items) {
+        this.orderId = 0;
         this.userId = userId;
         this.shopId = shopId;
-        this.senderId = senderId;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.senderId = 0;
+        this.startTime = null;
+        this.endTime = null;
         this.foodItems = items;
-        this.status = status;
     }
     public String getStatus() {
         return status;
@@ -82,7 +82,7 @@ public class OrderBean implements Serializable {
         this.endTime = endTime;
     }
 
-    public ArrayList<FoodBean> getFoodItems() {
+    public List<FoodBean> getFoodItems() {
         return foodItems;
     }
 

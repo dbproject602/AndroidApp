@@ -3,4 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="rice">#F5F5DC</color>
+    <color name="powderblue">#B0E0E6</color> <!--粉蓝色 -->
 </resources>

@@ -19,17 +19,20 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public int deleteOrderById(int orderId) throws Exception {
+    public int deleteOrderById(int orderId,Handler handler) throws Exception {
         return 0;
     }
 
     @Override
-    public int updateOrder(OrderBean orderBean) throws Exception {
+    public int updateOrder(OrderBean orderBean,Handler handler) throws Exception {
         return 0;
     }
 
     @Override
-    public int addOrder(OrderBean orderBean) throws Exception {
+    public int addOrder(OrderBean orderBean,Handler handler) throws Exception {
+        String servlet = "AddOrderServlet";
+        RequestBody requestBody = new FormBody.Builder().add("orderBean",String.valueOf(orderBean)).build();
+        HttpManager.update(requestBody,servlet,handler);
         return 0;
     }
 }

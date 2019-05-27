@@ -27,6 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name="com.db.view.CreateOrderActivity"></activity>
         <activity
             android:name="com.db.view.LauncherActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar">
@@ -44,8 +45,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.db.view.LoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.db.view.MainActivity"
             android:label="@string/app_name"

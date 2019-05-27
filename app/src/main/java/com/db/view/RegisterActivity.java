@@ -46,15 +46,14 @@ public class RegisterActivity extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.slide_out,
+                        R.anim.slide_in);
             }
         });
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int userId = 0; //userId无效
                 String userName = username.getText().toString();
                 String Name = name.getText().toString();
                 String Telephone = telephone.getText().toString();
@@ -67,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 try {
                     loading.setVisibility(View.VISIBLE);
-                    registerViewModel.setUserBean(userId,userName,Password,Telephone,Address,Name);
+                    registerViewModel.setUserBean(userName,Password,Telephone,Address,Name);
                     registerViewModel.register();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -89,12 +88,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     public void startLogin(){
-        Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
         loading.setVisibility(View.GONE);
-        startActivity(intent);
+        finish();
         overridePendingTransition(R.anim.slide_out,
                 R.anim.slide_in);
-        finish();
     }
 
 }

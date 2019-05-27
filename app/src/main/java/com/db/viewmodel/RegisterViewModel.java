@@ -34,8 +34,8 @@ public class RegisterViewModel extends ViewModel {
     public LiveData<Integer> getFlag() {
         return flag;
     }
-    public void setUserBean(int userId,String userName,String password,String telephone,String address,String name){
-        UserBean userBean = new UserBean(userId,userName,password,telephone,address,name);
+    public void setUserBean(String userName,String password,String telephone,String address,String name){
+        UserBean userBean = new UserBean(userName,password,telephone,address,name);
         this.userBean.setValue(userBean);
     }
     public void setFlag(int flag){
