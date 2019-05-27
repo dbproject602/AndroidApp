@@ -7,28 +7,38 @@ import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
 import android.os.Message;
 
+import java.util.List;
+
 import bean.ShopBean;
 import service.ShopService;
 import service.ShopServiceImpl;
 
 public class ShopViewModel extends ViewModel {
-    private MutableLiveData<ShopBean> shopBean = new MutableLiveData<>();
+    private MutableLiveData<List<ShopBean>> shopBeanList = new MutableLiveData<>();
+
     private int shoptype = 0;
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            shopBean.postValue((ShopBean) msg.obj);
+            shopBeanList.postValue((List<ShopBean>) msg.obj);
         }
     };
-    public void ShowShopList(int  shoptype) throws Exception{
+    public void ShowShopList() throws Exception{
         ShopService shopService = new ShopServiceImpl();
         shopService.showShopList(shoptype,handler);
 
     }
+    public int getShoptype() {
+        return shoptype;
+    }
 
-    public LiveData<ShopBean> getUserBean() {
-        return shopBean;
+    public void setShoptype(int shoptype) {
+        this.shoptype = shoptype;
+    }
+
+    public LiveData<List<ShopBean>> getShopBeanList() {
+        return shopBeanList;
     }
 }

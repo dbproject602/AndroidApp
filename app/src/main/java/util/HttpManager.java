@@ -40,5 +40,25 @@ public class HttpManager {
             }
         }).start();
     }
+    public static void update(final RequestBody requestbody, final String servlet,final Handler handler) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder().url(ip_service+servlet).post(requestbody).build();
+                try {
+                    Response response = client.newCall(request).execute();//发送请求
+
+                    Message message=new Message();
+                    message.what=1;
+                    handler.sendMessage(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
 
 }

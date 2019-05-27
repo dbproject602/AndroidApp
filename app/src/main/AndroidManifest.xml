@@ -41,7 +41,7 @@
             android:name="com.db.view.ShopActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.db.view.ResultActivity"
+            android:name="com.db.view.FoodActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.db.view.RegisterActivity"

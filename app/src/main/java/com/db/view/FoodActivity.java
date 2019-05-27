@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import com.example.activity.R;
 
-public class ResultActivity extends AppCompatActivity {
+public class FoodActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_food);
     }
 }

@@ -78,18 +78,11 @@
             android:text="推送设置" />
 
         <Button
-            android:id="@+id/setlocation"
+            android:id="@+id/information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="收货地址" />
-
-        <Button
-            android:id="@+id/safe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="安全设置" />
+            android:text="个人信息设置" />
 
         <Button
             android:id="@+id/logout"
