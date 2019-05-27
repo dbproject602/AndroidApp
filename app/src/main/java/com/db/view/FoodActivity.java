@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.activity.R;
 
-public class ResultActivity extends AppCompatActivity {
+public class FoodActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

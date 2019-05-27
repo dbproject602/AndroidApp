@@ -11,6 +11,4 @@ public class FoodDaoImpl implements FoodDao {
         RequestBody requestBody = new FormBody.Builder().add("shopid",String.valueOf(shopid)).build();
         HttpManager.send(requestBody,servlet,handler);
     }
-
-
 }
