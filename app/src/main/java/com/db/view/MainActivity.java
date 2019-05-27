@@ -40,10 +40,10 @@ public class MainActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         init_home();
         context = MainActivity.this;
-        locationManager = new LocationManager(this);
-        locationManager.registerListener(mListener);
-        locationManager.setLocationOption(locationManager.getDefaultLocationClientOption());
-        locationManager.start();
+     //   locationManager = new LocationManager(this);
+       // locationManager.registerListener(mListener);
+       // locationManager.setLocationOption(locationManager.getDefaultLocationClientOption());
+       // locationManager.start();
 
     }
 
@@ -51,8 +51,8 @@ public class MainActivity extends NavigationActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.unregisterListener(mListener); //注销掉监听
-        locationManager.stop(); //停止定位服务
+       // locationManager.unregisterListener(mListener); //注销掉监听
+       // locationManager.stop(); //停止定位服务
     }
 
 

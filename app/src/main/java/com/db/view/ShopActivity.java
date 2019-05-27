@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.db.viewmodel.RegisterViewModel;
 import com.db.viewmodel.ShopViewModel;
@@ -47,12 +49,14 @@ public class ShopActivity extends AppCompatActivity {
         final Observer<List<ShopBean>> ShopObserver = new Observer<List<ShopBean>>() {
             @Override
             public void onChanged(@Nullable List<ShopBean> shopBeanList) {
+                System.out.println("size"+shopBeanList.size());
                 for(ShopBean shopBean:shopBeanList){
                     CardView cardView = cardViewFactory(shopBean);
                     cardlayout.addView(cardView);
                 }
             }
         };
+
         shopViewModel.getShopBeanList().observe(this,ShopObserver);
         try {
             shopViewModel.ShowShopList();
@@ -66,11 +70,19 @@ public class ShopActivity extends AppCompatActivity {
       //  linearLayout.setOrientation(LinearLayout.HORIZONTAL);
        // linearLayout.setPadding(ViewUtil.dip2px(context,5),ViewUtil.dip2px(context,5), ViewUtil.dip2px(context,5),ViewUtil.dip2px(context,5));
       //  LinearLayout.LayoutParams LL_LP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        TextView textView = new TextView(this);
+        textView.setText(shopBean.getShopName());
         CardView cardView = new CardView(this);
+        cardView.addView(textView);
         cardView.setLayoutParams(new CardView.LayoutParams(
                 CardView.LayoutParams.MATCH_PARENT,   // width
-                ViewUtil.dip2px(context, 50))); // height
+               200)); // height
+        cardView.setRadius(20);
+        cardView.setElevation(5);
+        cardView.setPadding(0, 20, 10, 0);
+        cardView.setCardBackgroundColor(0);
         return cardView;
     }
+
 
 }

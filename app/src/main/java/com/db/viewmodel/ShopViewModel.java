@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 
 import java.util.List;
 
@@ -15,8 +16,7 @@ import service.ShopServiceImpl;
 
 public class ShopViewModel extends ViewModel {
     private MutableLiveData<List<ShopBean>> shopBeanList = new MutableLiveData<>();
-
-    private int shoptype = 0;
+    private static int shoptype = 0;
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
@@ -26,17 +26,14 @@ public class ShopViewModel extends ViewModel {
         }
     };
     public void ShowShopList() throws Exception{
-        System.out.println("yes show");
         ShopService shopService = new ShopServiceImpl();
         shopService.showShopList(shoptype,handler);
-
     }
-    public int getShoptype() {
+    public static int getShoptype() {
         return shoptype;
     }
 
     public void setShoptype(int shoptype) {
-        System.out.println("hasset");
         this.shoptype = shoptype;
     }
 

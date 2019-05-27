@@ -2,6 +2,7 @@ package bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShopBean implements Serializable {
     private int shopId;
@@ -15,13 +16,13 @@ public class ShopBean implements Serializable {
     private double sendRange;
     private double longitude;
     private double latitude;
-    private ArrayList<FoodBean> foodItems;
-    private ArrayList<Integer> senderIdItems;
+    private List<FoodBean> foodItems;
+    private List<SenderBean> senderItems;
 
-
-    public ShopBean(int shopId, String shopName, String password, int shopType, String telephone,
-                    String address, boolean isOpen, double reputation, double sendRange,
-                    double longitude, double latitude, ArrayList<FoodBean> foodItems, ArrayList<Integer> senderIdItems) {
+    public ShopBean(int shopId, String shopName, String password, int shopType,
+                    String telephone, String address, boolean isOpen,
+                    double reputation, double sendRange, double longitude, double latitude,
+                    List<FoodBean> foodItems, List<SenderBean> senderItems) {
         this.shopId = shopId;
         this.shopName = shopName;
         this.password = password;
@@ -34,23 +35,23 @@ public class ShopBean implements Serializable {
         this.longitude = longitude;
         this.latitude = latitude;
         this.foodItems = foodItems;
-        this.senderIdItems = senderIdItems;
+        this.senderItems = senderItems;
     }
 
-    public ArrayList<FoodBean> getFoodItems() {
+    public List<FoodBean> getFoodItems() {
         return foodItems;
     }
 
-    public void setFoodItems(ArrayList<FoodBean> foodItems) {
+    public void setFoodItems(List<FoodBean> foodItems) {
         this.foodItems = foodItems;
     }
 
-    public ArrayList<Integer> getSenderIdItems() {
-        return senderIdItems;
+    public List<SenderBean> getSenderItems() {
+        return senderItems;
     }
 
-    public void setSenderIdItems(ArrayList<Integer> senderIdItems) {
-        this.senderIdItems = senderIdItems;
+    public void setSenderItems(List<SenderBean> senderItems) {
+        this.senderItems = senderItems;
     }
 
     public int getShopId() {

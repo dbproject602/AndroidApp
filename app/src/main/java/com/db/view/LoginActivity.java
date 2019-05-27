@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 try {
                     loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
-                    startMain();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
