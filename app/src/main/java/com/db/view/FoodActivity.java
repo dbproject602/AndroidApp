@@ -59,23 +59,24 @@ public class FoodActivity extends AppCompatActivity {
                 finish();
             }
         });
-        final Observer<List<FoodBean>> foodObserver = new Observer<List<FoodBean>>() {
-            @Override
-            public void onChanged(@Nullable List<FoodBean> foodBeanList) {
-                for(FoodBean foodBean:foodBeanList){
-                    generateFoodCard(foodBean);
-//                    cardlayout.addView(cardView);
-                }
-            }
-        };
-
-        foodViewModel.getShopBeanList().observe(this,foodObserver);
-        try {
-            foodViewModel.ShowFoodList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        final Observer<List<FoodBean>> foodObserver = new Observer<List<FoodBean>>() {
+//            @Override
+//            public void onChanged(@Nullable List<FoodBean> foodBeanList) {
+//                for(FoodBean foodBean:foodBeanList){
+//                    generateFoodCard(foodBean);
+////                    cardlayout.addView(cardView);
+//                }
+//            }
+//        };
+//
+//        foodViewModel.getShopBeanList().observe(this,foodObserver);
+//        try {
+//            foodViewModel.ShowFoodList();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
+
     private void generateFoodCard(FoodBean foodBean) {
         View cardView = View.inflate(this, R.layout.food_item, null);
         TextView foodName = (TextView) cardView.findViewById(R.id.foodName);

@@ -6,5 +6,5 @@ import android.os.Handler;
 import bean.FoodBean;
 
 public interface FoodDao {
-    void fetchFoodList(int shopid, Handler handler) throws Exception;
+    void fetchFoodList(String shopid, Handler handler) throws Exception;
 }

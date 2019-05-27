@@ -10,14 +10,14 @@ import java.util.List;
 public class OrderBean implements Serializable {
     private int orderId;
     private int userId;
-    private int shopId;
+    private String shopId;
     private int senderId;
     private Date startTime;
     private Date endTime;
     private List<FoodBean> foodItems;
     private String status; //需要记录Order的状态，三个状态已下单，派送中，结单
 
-    public OrderBean( int userId, int shopId, List<FoodBean> items) {
+    public OrderBean( int userId, String shopId, List<FoodBean> items) {
         this.orderId = 0;
         this.userId = userId;
         this.shopId = shopId;
@@ -50,11 +50,11 @@ public class OrderBean implements Serializable {
         this.userId = userId;
     }
 
-    public int getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 

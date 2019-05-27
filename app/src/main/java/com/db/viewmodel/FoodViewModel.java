@@ -16,7 +16,7 @@ import service.FoodServiceImpl;
 public class FoodViewModel extends ViewModel {
     private MutableLiveData<List<FoodBean>> foodBeanList = new MutableLiveData<>();
 
-    private int shopid = 0;
+    private String shopid = "";
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
@@ -30,11 +30,11 @@ public class FoodViewModel extends ViewModel {
         foodService.ShowFoodList(shopid,handler);
 
     }
-    public int getshopid() {
+    public String getshopid() {
         return shopid;
     }
 
-    public void setshopid(int shopid) {
+    public void setshopid(String shopid) {
         this.shopid = shopid;
     }
 

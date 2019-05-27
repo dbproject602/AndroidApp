@@ -6,7 +6,7 @@ import util.HttpManager;
 
 public class FoodDaoImpl implements FoodDao {
     @Override
-    public void fetchFoodList(int shopid,Handler handler) throws Exception {
+    public void fetchFoodList(String shopid,Handler handler) throws Exception {
         String servlet = "FetchFoodServlet";
         RequestBody requestBody = new FormBody.Builder().add("shopid",String.valueOf(shopid)).build();
         HttpManager.send(requestBody,servlet,handler);
