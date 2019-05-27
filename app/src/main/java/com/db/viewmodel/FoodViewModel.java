@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class FoodViewModel extends ViewModel {
     };
     public void ShowFoodList() throws Exception{
         FoodService foodService = new FoodServiceImpl();
+        Log.d("Food","foodID"+shopid);
         foodService.ShowFoodList(shopid,handler);
 
     }

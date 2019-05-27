@@ -27,51 +27,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/HeadShopName"
-        android:padding="10dp"
+        android:padding="5dp"
+        android:textSize="18dp"
         android:text="店家名字" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
 
-        android:layout_gravity="right"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_home_black_24dp"
-
-            />
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|end"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <!--<ImageView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@drawable/ic_home_black_24dp"-->
+
+                <!--/>-->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/HeadShopAddress"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                android:text="位置" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/HeadShopDist"
-                android:padding="5dp"
-                android:layout_margin="10dp"
-                android:text="距离: 1km" />
+                <TextView
+                    android:id="@+id/HeadShopAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:text="位置" />
+
+                <TextView
+                    android:id="@+id/HeadShopDist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:text="距离: 1km" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -79,6 +85,7 @@
             android:layout_gravity="right"
             android:gravity="center"
             android:orientation="vertical">
+
             <Button
                 android:id="@+id/collect"
                 android:layout_width="wrap_content"
@@ -86,7 +93,7 @@
                 android:layout_gravity="center"
                 android:text="收藏"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"  />
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </LinearLayout>
         <RelativeLayout

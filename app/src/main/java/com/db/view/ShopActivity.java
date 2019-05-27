@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -73,6 +74,9 @@ public class ShopActivity extends AppCompatActivity {
             public void onClick(View v) {
                 foodViewModel.setshopid(shopBean.getShopId());
                 Intent intent = new Intent(ShopActivity.this,FoodActivity.class);
+                intent.putExtra("shopId", shopBean.getShopId());
+                intent.putExtra("shopName", shopBean.getShopName());
+                intent.putExtra("shopAddress", shopBean.getAddress());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
