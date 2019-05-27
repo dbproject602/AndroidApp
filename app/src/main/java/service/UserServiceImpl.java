@@ -16,4 +16,10 @@ public class UserServiceImpl implements UserService {
     public void register(UserBean userBean, Handler handler) throws Exception{
         userDao.addUser(userBean ,handler);
     }
+
+    @Override
+    public int update(UserBean userBean, Handler handler) throws Exception {
+        return 0;
+    }
+
 }
