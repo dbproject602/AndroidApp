@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,14 +54,19 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loading.setVisibility(View.VISIBLE);
                 int userId = 0; //userId无效
                 String userName = username.getText().toString();
                 String Name = name.getText().toString();
                 String Telephone = telephone.getText().toString();
                 String Password = password.getText().toString();
+                String Repassword = repassword.getText().toString();
                 String Address = address.getText().toString();
+                if(!Password.equals(Repassword)||userName.equals("")||Name.equals("")||Telephone.equals("")||Password.equals("")||address.equals("")){
+                    System.out.println("error");
+                    return;
+                }
                 try {
+                    loading.setVisibility(View.VISIBLE);
                     registerViewModel.setUserBean(userId,userName,Password,Telephone,Address,Name);
                     registerViewModel.register();
                 } catch (Exception e) {
@@ -74,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if(flag != 0) {
                     startLogin();
                 }else{
+                    loading.setVisibility(View.GONE);
                     System.out.println("error");
                 }
             }

@@ -15,7 +15,9 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.baidu.location.BDAbstractLocationListener;
@@ -52,10 +54,19 @@ public class MainActivity extends NavigationActivity {
     private Context context;
     private MapPageViewModel mapPageViewModel;
     private BaiduMap baiduMap;
+    private ImageView accountImg;
+    private TextView name;
+    private TextView location;
+    private TextView phone;
+    private Button like;
+    private Button pay;
+    private Button push;
+    private Button information;
+    private Button logout;
+    private BottomNavigationView navView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDKInitializer.initialize(getApplicationContext());
         init_home();
         context = MainActivity.this;
 
@@ -65,8 +76,6 @@ public class MainActivity extends NavigationActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.unregisterListener(mListener); //注销掉监听
-        locationManager.stop(); //停止定位服务
     }
 
 
@@ -74,7 +83,7 @@ public class MainActivity extends NavigationActivity {
     void init_home(){
         setpage(0);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Button china_btn = findViewById(R.id.r_chinese);
         Button west_btn = findViewById(R.id.r_west);
@@ -132,6 +141,7 @@ public class MainActivity extends NavigationActivity {
 
     @Override
     void init_arround(){
+        SDKInitializer.initialize(getApplicationContext());
         setpage(1);
         setContentView(R.layout.activity_map);
         mapPageViewModel = ViewModelProviders.of(this).get(MapPageViewModel.class);
@@ -144,9 +154,6 @@ public class MainActivity extends NavigationActivity {
      //   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_chevron_left_black_40dp);
     //    OverlayOptions options = new MarkerOptions().icon(icon).position(point);
      //   baiduMap.addOverlay(options);
-        //定义地图状态
-
-        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
         final Observer<double[]> locationObserver = new Observer<double[]>() {
             @Override
             public void onChanged(@Nullable double[] location) {
@@ -162,7 +169,7 @@ public class MainActivity extends NavigationActivity {
         };
         mapPageViewModel.getLocation().observe(this,locationObserver);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(1).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         final AccountPageViewModel model = ViewModelProviders.of(this).get(AccountPageViewModel.class);
@@ -178,7 +185,7 @@ public class MainActivity extends NavigationActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(2).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -187,7 +194,22 @@ public class MainActivity extends NavigationActivity {
     void init_account(){
         setpage(3);
         setContentView(R.layout.activity_account);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        accountImg = (ImageView) findViewById(R.id.account_img);
+        name = (TextView) findViewById(R.id.name);
+        location = (TextView) findViewById(R.id.location);
+        phone = (TextView) findViewById(R.id.phone);
+        like = (Button) findViewById(R.id.like);
+        pay = (Button) findViewById(R.id.pay);
+        push = (Button) findViewById(R.id.push);
+        information = (Button) findViewById(R.id.information);
+        logout = (Button) findViewById(R.id.logout);;
+        information.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(3).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         final AccountPageViewModel model = ViewModelProviders.of(this).get(AccountPageViewModel.class);

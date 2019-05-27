@@ -2,6 +2,15 @@ package com.db.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-public class AccountPageViewModel extends ViewModel {
+import bean.UserBean;
 
+public class AccountPageViewModel extends ViewModel {
+    private static UserBean userBean;
+    public static UserBean getUserBean() {
+        return userBean;
+    }
+
+    public static void setUserBean(UserBean userBean) {
+        AccountPageViewModel.userBean = userBean;
+    }
 }

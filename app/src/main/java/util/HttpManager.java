@@ -12,7 +12,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpManager {
-    static String ip_service = "http://192.168.43.32:8080/";
+    static String ip_service = "http://10.21.99.25:8080/";
 
     public static void send(final RequestBody requestbody, final String servlet,final Handler handler) {
 
@@ -34,6 +34,9 @@ public class HttpManager {
                     message.obj=result;
                     handler.sendMessage(message);
                 } catch (IOException e) {
+                    Message message=new Message();
+                    message.obj=null;
+                    handler.sendMessage(message);
                     e.printStackTrace();
                 }
 
@@ -49,11 +52,13 @@ public class HttpManager {
                 Request request = new Request.Builder().url(ip_service+servlet).post(requestbody).build();
                 try {
                     Response response = client.newCall(request).execute();//发送请求
-
                     Message message=new Message();
                     message.what=1;
                     handler.sendMessage(message);
                 } catch (Exception e) {
+                    Message message=new Message();
+                    message.what=0;
+                    handler.sendMessage(message);
                     e.printStackTrace();
                 }
 

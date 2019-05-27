@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.db.viewmodel.AccountPageViewModel;
 import com.db.viewmodel.LoginViewModel;
 import com.example.activity.R;
 
@@ -41,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 try {
                     loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
-                    startMain();
+               //     startMain();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -59,8 +60,14 @@ public class LoginActivity extends AppCompatActivity {
         });
         final Observer<UserBean> userBeanObserver = new Observer<UserBean>() {
             @Override
-            public void onChanged(@Nullable UserBean userinfoBean) {
-                startMain();
+            public void onChanged(@Nullable UserBean userBean) {
+                if(userBean==null){
+                    System.out.println();
+                    progressBar.setVisibility(View.GONE);
+                }else {
+                    AccountPageViewModel.setUserBean(userBean);
+                    startMain();
+                }
             }
         };
         loginViewModel.getUserBean().observe(this,userBeanObserver);

@@ -30,6 +30,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    System.out.println("1");
                     if(curPgae==0){
                         return true;
                     }else {
@@ -37,6 +38,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
                         return true;
                     }
                 case R.id.navigation_around:
+                    System.out.println("2");
                     if(curPgae==1){
                         return true;
                     }else {
@@ -44,6 +46,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
                         return true;
                     }
                 case R.id.navigation_order:
+                    System.out.println("3");
                     if(curPgae==2){
                         return true;
                     }else {
@@ -51,6 +54,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
                         return  true;
                     }
                 case R.id.navigation_account:
+                    System.out.println("4");
                     if(curPgae==3){
                         return true;
                     }else {
