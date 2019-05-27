@@ -12,7 +12,7 @@
     tools:context="com.db.view.ShopActivity">
 
     <ImageButton
-        android:id="@+id/backbtn"
+        android:id="@+id/backbtn_shop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_chevron_left_black_40dp"

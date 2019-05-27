@@ -30,12 +30,12 @@ public class LoginActivity extends AppCompatActivity {
                 R.anim.slide_in);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginbtn = findViewById(R.id.login);
         registerbtn = findViewById(R.id.register);
         userNameview = findViewById(R.id.username);
         passwordview = findViewById(R.id.password);
         progressBar = findViewById(R.id.loading);
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        loginbtn = findViewById(R.id.login);
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
