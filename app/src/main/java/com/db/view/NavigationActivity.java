@@ -17,7 +17,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
 
     abstract void init_home();
 
-    abstract void init_arrount();
+    abstract void init_arround();
 
     abstract void init_order();
 
@@ -40,7 +40,7 @@ public abstract class NavigationActivity extends AppCompatActivity {
                     if(curPgae==1){
                         return true;
                     }else {
-                        init_arrount();
+                        init_arround();
                         return true;
                     }
                 case R.id.navigation_order:

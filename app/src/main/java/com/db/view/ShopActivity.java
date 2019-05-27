@@ -49,7 +49,6 @@ public class ShopActivity extends AppCompatActivity {
         final Observer<List<ShopBean>> ShopObserver = new Observer<List<ShopBean>>() {
             @Override
             public void onChanged(@Nullable List<ShopBean> shopBeanList) {
-                System.out.println("size"+shopBeanList.size());
                 for(ShopBean shopBean:shopBeanList){
                     CardView cardView = cardViewFactory(shopBean);
                     cardlayout.addView(cardView);
