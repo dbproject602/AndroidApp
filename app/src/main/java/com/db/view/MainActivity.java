@@ -86,7 +86,7 @@ public class MainActivity extends NavigationActivity {
         china_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(0);
+                shopmodel.setShoptype(1);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -97,7 +97,7 @@ public class MainActivity extends NavigationActivity {
         west_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(1);
+                shopmodel.setShoptype(2);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -108,7 +108,7 @@ public class MainActivity extends NavigationActivity {
         fast_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(2);
+                shopmodel.setShoptype(3);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -119,7 +119,7 @@ public class MainActivity extends NavigationActivity {
         janpan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shopmodel.setShoptype(3);
+                shopmodel.setShoptype(4);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
