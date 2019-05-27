@@ -19,6 +19,8 @@ import com.db.viewmodel.RegisterViewModel;
 import com.db.viewmodel.ShopViewModel;
 import com.example.activity.R;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import bean.ShopBean;
@@ -51,8 +53,8 @@ public class ShopActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<ShopBean> shopBeanList) {
                 System.out.println("size"+shopBeanList.size());
                 for(ShopBean shopBean:shopBeanList){
-                    CardView cardView = cardViewFactory(shopBean);
-                    cardlayout.addView(cardView);
+                    cardViewFactory(shopBean);
+//                    cardlayout.addView(cardView);
                 }
             }
         };
@@ -65,31 +67,37 @@ public class ShopActivity extends AppCompatActivity {
         }
     }
 
-    private CardView cardViewFactory(ShopBean shopBean) {
+    private void cardViewFactory(ShopBean shopBean) {
        // LinearLayout linearLayout=new LinearLayout(this);
       //  linearLayout.setOrientation(LinearLayout.HORIZONTAL);
        // linearLayout.setPadding(ViewUtil.dip2px(context,5),ViewUtil.dip2px(context,5), ViewUtil.dip2px(context,5),ViewUtil.dip2px(context,5));
       //  LinearLayout.LayoutParams LL_LP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-        CardView cardView = new CardView(this);
-        TextView foodName = new TextView(this);
-        foodName.setText(shopBean.getShopName());
-        foodName.setTextSize(18);
-        cardView.addView(foodName);
-
-        TextView address = new TextView(this);
-        address.setText(shopBean.getAddress());
-        address.setTextSize(10);
-        cardView.addView(address);
-
-        cardView.setLayoutParams(new CardView.LayoutParams(
-                CardView.LayoutParams.MATCH_PARENT,   // width
-               200)); // height
-        cardView.setRadius(20);
-        cardView.setElevation(5);
-        cardView.setPadding(0, 20, 10, 0);
-        cardView.setCardBackgroundColor(0);
-
+//        CardView cardView = new CardView(this);
+//        TextView foodName = new TextView(this);
+//        foodName.setText(shopBean.getShopName());
+//        foodName.setTextSize(18);
+//        cardView.addView(foodName);
+//
+//        TextView address = new TextView(this);
+//        address.setText(shopBean.getAddress());
+//        address.setTextSize(10);
+//        cardView.addView(address);
+//
+//        cardView.setLayoutParams(new CardView.LayoutParams(
+//                CardView.LayoutParams.MATCH_PARENT,   // width
+//               200)); // height
+//        cardView.setRadius(20);
+//        cardView.setElevation(5);
+//        cardView.setPadding(0, 20, 10, 0);
+//        cardView.setCardBackgroundColor(0);
+        View cardView = View.inflate(this, R.layout.item, null);
+        TextView shopName = (TextView) cardView.findViewById(R.id.shopName);
+        TextView rating = (TextView) cardView.findViewById(R.id.rating);
+        rating.setText("评分："+String.valueOf(shopBean.getReputation()));
+        shopName.setText(shopBean.getShopName());
+//        TextView address = (TextView) cardView.findViewById(R.id.address);
+//        address.setText(shopBean.getAddress());
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +108,8 @@ public class ShopActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        return cardView;
+        cardlayout.addView(cardView);
+//        return cardView;
     }
 
 
