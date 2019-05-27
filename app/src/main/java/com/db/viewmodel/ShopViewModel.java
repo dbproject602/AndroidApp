@@ -26,6 +26,7 @@ public class ShopViewModel extends ViewModel {
         }
     };
     public void ShowShopList() throws Exception{
+        System.out.println("yes show");
         ShopService shopService = new ShopServiceImpl();
         shopService.showShopList(shoptype,handler);
 
@@ -35,6 +36,7 @@ public class ShopViewModel extends ViewModel {
     }
 
     public void setShoptype(int shoptype) {
+        System.out.println("hasset");
         this.shoptype = shoptype;
     }
 

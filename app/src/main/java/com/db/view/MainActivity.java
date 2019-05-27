@@ -2,6 +2,7 @@ package com.db.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,14 +34,15 @@ import util.LocationManager;
 
 public class MainActivity extends NavigationActivity {
     private LocationManager locationManager;
-
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init_home();
+        context = MainActivity.this;
         locationManager = new LocationManager(this);
         locationManager.registerListener(mListener);
         locationManager.setLocationOption(locationManager.getDefaultLocationClientOption());
-        init_home();
         locationManager.start();
 
     }
@@ -56,20 +58,21 @@ public class MainActivity extends NavigationActivity {
 
     @Override
     void init_home(){
-        setcurrent_Activity(0,this);
+        setpage(0);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         Button china_btn = findViewById(R.id.r_chinese);
         Button west_btn = findViewById(R.id.r_west);
         Button fast_btn = findViewById(R.id.r_fast);
-        Button janpan_btn = findViewById(R.id.r_chinese);
+        Button janpan_btn = findViewById(R.id.r_japanese);
         SearchView searchView = findViewById(R.id.searchView);
         final HomePageViewModel model = ViewModelProviders.of(this).get(HomePageViewModel.class);
         final ShopViewModel shopmodel = ViewModelProviders.of(this).get(ShopViewModel.class);
         china_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopmodel.setShoptype(0);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -80,6 +83,7 @@ public class MainActivity extends NavigationActivity {
         west_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopmodel.setShoptype(1);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -90,6 +94,7 @@ public class MainActivity extends NavigationActivity {
         fast_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopmodel.setShoptype(2);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -100,6 +105,7 @@ public class MainActivity extends NavigationActivity {
         janpan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                shopmodel.setShoptype(3);
                 Intent intent = new Intent(MainActivity.this,ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
@@ -112,7 +118,7 @@ public class MainActivity extends NavigationActivity {
 
     @Override
     void init_arrount(){
-        setcurrent_Activity(1,cur_activity);
+        setpage(1);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
         MapView mv = (MapView) findViewById(R.id.mv);
@@ -125,9 +131,9 @@ public class MainActivity extends NavigationActivity {
 
     @Override
     void init_order(){
-        setcurrent_Activity(2,cur_activity);
+        setpage(2);
         setContentView(R.layout.activity_order);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(cur_activity, getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -139,7 +145,7 @@ public class MainActivity extends NavigationActivity {
 
     @Override
     void init_account(){
-        setcurrent_Activity(3,cur_activity);
+        setpage(3);
         setContentView(R.layout.activity_account);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(3).getItemId());
