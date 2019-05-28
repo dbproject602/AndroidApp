@@ -3,6 +3,7 @@ package com.db.view;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,8 @@ public class FoodActivity extends AppCompatActivity {
     private TextView shopName;
     private TextView address;
     private TextView distant;
+    private TextView phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +48,12 @@ public class FoodActivity extends AppCompatActivity {
         foodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
         shopName = findViewById(R.id.HeadShopName);
         address = findViewById(R.id.HeadShopAddress);
+        phone = findViewById(R.id.HeadShopPhone);
         distant = findViewById(R.id.HeadShopDist);
         submit = findViewById(R.id.submit);
         shopName.setText(FoodViewModel.getshopBean().getShopName());  //直接把商家shopBean传入
         address.setText(FoodViewModel.getshopBean().getAddress());
+        phone.setText(FoodViewModel.getshopBean().getTelephone());
         backbtn = findViewById(R.id.backbtn_food);
         //  检查是否收藏；收藏则变成已收藏，button失效
         submit.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +78,8 @@ public class FoodActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
 //                    loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
+                    collectBtn.setBackgroundColor(Color.parseColor("#FFA500"));
+                    collectBtn.setText("已收藏");
                     //     startMain();
                 } catch (Exception e) {
                     e.printStackTrace();
