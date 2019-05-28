@@ -76,12 +76,12 @@ public class FoodActivity extends AppCompatActivity {
         final Observer<List<FoodBean>> foodObserver = new Observer<List<FoodBean>>() {
             @Override
             public void onChanged(@Nullable List<FoodBean> foodBeanList) {
-//                System.out.println("debug: size of foodlist:"+foodBeanList.is);
-//                for(FoodBean foodBean:foodBeanList){
-////                    generateFoodCard(foodBean);
+
+              for(FoodBean foodBean:foodBeanList){
+                   generateFoodCard(foodBean);
 ////                    cardlayout.addView(cardView);
 //
-//                }
+              }
             }
         };
 
@@ -100,7 +100,7 @@ public class FoodActivity extends AppCompatActivity {
         TextView price = (TextView) cardView.findViewById(R.id.price);
         price.setText("¥："+String.valueOf(foodBean.getPrice()));
         foodName.setText(foodBean.getFoodName());
-        Button addBtn = cardView.findViewById(R.id.addBtn);
+        ImageButton  addBtn = cardView.findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {   //  添加入购物列表

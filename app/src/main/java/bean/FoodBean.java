@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class FoodBean implements Serializable {
     private String foodId;
     private String foodName;
-    private int shopId;
+    private String shopId;
     private double price;
     private int remaining;
     // 食物不需要评级
-    public FoodBean(String foodId, String foodName, int shopId, double price, int remaining) {
+    public FoodBean(String foodId, String foodName, String shopId, double price, int remaining) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.shopId = shopId;
@@ -33,11 +33,11 @@ public class FoodBean implements Serializable {
         this.foodName = foodName;
     }
 
-    public int getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
