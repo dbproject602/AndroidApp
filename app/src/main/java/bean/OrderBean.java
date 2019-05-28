@@ -16,7 +16,10 @@ public class OrderBean implements Serializable {
     private Date endTime;
     private List<FoodBean> foodItems;
     private int state; //需要记录Order的状态，三个状态已下单，派送中，结单
+    private ShopBean shopBean;
+    private SenderBean senderBean;
 
+    //   保证结构统一。前端的构造器
     public OrderBean( int userId, String shopId, List<FoodBean> items) {
         this.orderId = 0;
         this.userId = userId;
@@ -27,7 +30,10 @@ public class OrderBean implements Serializable {
         this.foodItems = items;
         this.state = 0;
     }
-    public OrderBean(int orderId, int userId, String shopId, int senderId, Date startTime, Date endTime, List<FoodBean> items,int state) {
+
+    //   保证结构统一。后端的构造器
+    public OrderBean(int orderId, int userId, String shopId, int senderId, Date startTime,
+                     Date endTime, List<FoodBean> items,int state,ShopBean shopBean,SenderBean senderBean) {
         this.orderId = orderId;
         this.userId = userId;
         this.shopId = shopId;
@@ -36,6 +42,8 @@ public class OrderBean implements Serializable {
         this.endTime = endTime;
         this.foodItems = items;
         this.state = state;
+        this.shopBean = shopBean;
+        this.senderBean = senderBean;
     }
     public int getState() { return state; }
 
@@ -97,5 +105,21 @@ public class OrderBean implements Serializable {
 
     public void setFoodItems(List<FoodBean> foodItems) {
         this.foodItems = foodItems;
+    }
+
+    public ShopBean getShopBean() {
+        return shopBean;
+    }
+
+    public void setShopBean(ShopBean shopBean) {
+        this.shopBean = shopBean;
+    }
+
+    public SenderBean getSenderBean() {
+        return senderBean;
+    }
+
+    public void setSenderBean(SenderBean senderBean) {
+        this.senderBean = senderBean;
     }
 }
