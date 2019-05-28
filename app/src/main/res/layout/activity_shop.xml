@@ -27,7 +27,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backbtn">
+        app:layout_constraintTop_toBottomOf="@id/backbtn_shop">
 
         <ScrollView
             android:id="@+id/scrollview"

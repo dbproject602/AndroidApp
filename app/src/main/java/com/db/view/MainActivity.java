@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -105,18 +108,37 @@ public class MainActivity extends AppCompatActivity {
         Button west_btn = findViewById(R.id.r_west);
         Button fast_btn = findViewById(R.id.r_fast);
         Button janpan_btn = findViewById(R.id.r_japanese);
-        SearchView searchView = findViewById(R.id.searchView);
+        final SearchView searchView = findViewById(R.id.searchView);
         final HomePageViewModel model = ViewModelProviders.of(this).get(HomePageViewModel.class);
         try {
             IOUtil.writeFileDataTobytes(FILENAME,AccountPageViewModel.getUserBean(),this);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                              @Override
+                                              public boolean onQueryTextSubmit(String query) {
+                                                  System.out.println("check point");
+                                                  ShopViewModel.setShopname(query);
+                                                  ShopViewModel.setShoptype(-1);
+                                                  Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                                                  startActivity(intent);
+                                                  overridePendingTransition(R.anim.slide_out,
+                                                          R.anim.slide_in);
+                                                  searchView.setIconified(true);
+                                                  return true;
+                                              }
+
+                                              @Override
+                                              public boolean onQueryTextChange(String newText) {
+                                                  return false;
+                                              }
+                                          });
         china_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShopViewModel.setShoptype(1);
-                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
@@ -166,7 +188,19 @@ public class MainActivity extends AppCompatActivity {
         locationManager.start();
         MapView mv = (MapView) findViewById(R.id.mv);
         baiduMap = mv.getMap();
-
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                ShopBean shopBean = (ShopBean)marker.getExtraInfo().get("shopBean");
+                Button location = new Button(getApplicationContext());
+                location.setText(shopBean.getShopName());
+                LatLng markpo = marker.getPosition();
+                InfoWindow mInfoWindow = new InfoWindow(location, markpo,-100);
+                baiduMap.showInfoWindow(mInfoWindow);
+                System.out.println(shopBean.getShopName());
+                return false;
+            }
+        });
         final Observer<double[]> locationObserver = new Observer<double[]>() {
             @Override
             public void onChanged(@Nullable double[] location) {
@@ -177,6 +211,9 @@ public class MainActivity extends AppCompatActivity {
                         .zoom(16)
                         .build();
                 MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.self);
+                OverlayOptions options = new MarkerOptions().icon(icon).position(point);
+                Marker marker = (Marker) (baiduMap.addOverlay(options));
                 //改变地图状态
                 try {
                     mapPageViewModel.showShopListbyDis(point.longitude,point.latitude);
@@ -190,17 +227,19 @@ public class MainActivity extends AppCompatActivity {
         final Observer<List<ShopBean>> shoplistObserver = new Observer<List<ShopBean>>(){
             @Override
             public void onChanged(@Nullable List<ShopBean> shoplist) {
-                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.loc);
                 OverlayOptions options = null;
-                ArrayList<OverlayOptions> ops = new ArrayList<>();
-                for (ShopBean shopBean:shoplist){
-                    LatLng po = new LatLng(shopBean.getLatitude(),shopBean.getLongitude());
+                for (final ShopBean shopBean:shoplist){
+                    final LatLng po = new LatLng(shopBean.getLatitude(),shopBean.getLongitude());
+                    BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.loc);
                     options = new MarkerOptions().icon(icon).position(po);
-                    ops.add(options);
+                    Marker marker = (Marker) (baiduMap.addOverlay(options));
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("shopBean",shopBean);
+                    marker.setExtraInfo(bundle);
                 }
-                baiduMap.addOverlays(ops);
             }
         };
+
 
 
         mapPageViewModel.getLocation().observe(this,locationObserver);

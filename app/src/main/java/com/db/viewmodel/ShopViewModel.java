@@ -18,6 +18,10 @@ import service.ShopServiceImpl;
 public class ShopViewModel extends ViewModel {
     private MutableLiveData<List<ShopBean>> shopBeanList = new MutableLiveData<>();
     private static int shoptype = 0;
+
+
+
+    private static String shopname = "";
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
@@ -31,6 +35,10 @@ public class ShopViewModel extends ViewModel {
         ShopService shopService = new ShopServiceImpl();
         shopService.showShopList(shoptype,handler);
     }
+    public void ShowShopListbyShopname() throws Exception{
+        ShopService shopService = new ShopServiceImpl();
+        shopService.showShopListbyName(shopname,handler);
+    }
     public static int getShoptype() {
         return shoptype;
     }
@@ -41,5 +49,13 @@ public class ShopViewModel extends ViewModel {
 
     public LiveData<List<ShopBean>> getShopBeanList() {
         return shopBeanList;
+    }
+
+    public static String getShopname() {
+        return shopname;
+    }
+
+    public static void setShopname(String shopname) {
+        ShopViewModel.shopname = shopname;
     }
 }
