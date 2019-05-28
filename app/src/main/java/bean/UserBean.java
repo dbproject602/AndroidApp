@@ -9,14 +9,25 @@ public class UserBean implements Serializable {
     private String telephone;
     private String address;
     private String name;   //用户的名字
+    private double money;
 
-    public UserBean(int userId, String userName, String password, String telephone, String address,String name) {
+
+    public UserBean(int userId, String userName, String password, String telephone, String address,String name, double balance) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.telephone = telephone;
         this.address = address;
         this.name = name;
+        this.money = balance;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double balance) {
+        this.money = balance;
     }
 
     public UserBean(String userName, String password, String telephone, String address,String name) {
