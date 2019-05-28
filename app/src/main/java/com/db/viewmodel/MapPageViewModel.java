@@ -23,6 +23,7 @@ public class MapPageViewModel extends ViewModel {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            System.out.println(msg.obj.toString());
             shopBeanList.postValue((List<ShopBean>)msg.obj);
         }
     };

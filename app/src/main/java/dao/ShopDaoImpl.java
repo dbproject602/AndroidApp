@@ -20,9 +20,9 @@ public class ShopDaoImpl implements ShopDao {
 
     @Override
     public void fetchShopListbyName(String shopName, Handler handler) throws Exception {
-      //  String servlet = "FetchShopListServlet";
-   //     RequestBody requestBody = new FormBody.Builder().add("shoptype",String.valueOf(shopType)).build();
-     //   HttpManager.send(requestBody,servlet,handler);
+        String servlet = "FetchShopListByStrServlet";
+        RequestBody requestBody = new FormBody.Builder().add("findStr",shopName).build();
+        HttpManager.send(requestBody,servlet,handler);
     }
 
     @Override

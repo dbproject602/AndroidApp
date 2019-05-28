@@ -54,7 +54,11 @@ public class ShopActivity extends AppCompatActivity {
 
         shopViewModel.getShopBeanList().observe(this,ShopObserver);
         try {
-            shopViewModel.ShowShopList();
+            if(ShopViewModel.getShoptype()!=-1) {
+                shopViewModel.ShowShopList();
+            }else{
+                shopViewModel.ShowShopListbyShopname();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
