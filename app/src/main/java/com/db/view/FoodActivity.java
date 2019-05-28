@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.db.viewmodel.AccountPageViewModel;
@@ -32,15 +34,21 @@ public class FoodActivity extends AppCompatActivity {
     private FloatingActionButton submit;
     private FoodViewModel foodViewModel;
     private LinearLayout cardlayout;
+    private TextView shopName;
+    private TextView address;
+    private TextView distant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         cardlayout = findViewById(R.id.food_layout);
         foodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
-        TextView shopName = findViewById(R.id.HeadShopName);
+        shopName = findViewById(R.id.HeadShopName);
+        address = findViewById(R.id.HeadShopAddress);
+        distant = findViewById(R.id.HeadShopDist);
         submit = findViewById(R.id.submit);
-        shopName.setText("名字");  //直接把商家shopBean传入
+        shopName.setText(FoodViewModel.getshopBean().getShopName());  //直接把商家shopBean传入
+        address.setText(FoodViewModel.getshopBean().getAddress());
         backbtn = findViewById(R.id.backbtn_food);
         //  检查是否收藏；收藏则变成已收藏，button失效
         submit.setOnClickListener(new View.OnClickListener() {
@@ -104,15 +112,35 @@ public class FoodActivity extends AppCompatActivity {
         TextView price = (TextView) cardView.findViewById(R.id.price);
         price.setText("¥："+String.valueOf(foodBean.getPrice()));
         foodName.setText(foodBean.getFoodName());
-        final Button addBtn = cardView.findViewById(R.id.addBtn);
+        final RadioButton addBtn = cardView.findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
+            Boolean flag = addBtn.isChecked();
             @Override
-            public void onClick(View v) {   //  添加入购物列表
-                try {
-                  foodViewModel.addChoose(foodBean);
-                  addBtn.setActivated(false);
-                } catch (Exception e) {
-                    e.printStackTrace();
+            public void onClick(View v) {
+                if(!flag){
+                    flag = true;
+                    addBtn.setChecked(true);
+                }else{
+                    flag = false;
+                    addBtn.setChecked(false);
+                }
+            }
+        });
+        addBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(addBtn.isChecked()) {
+                    try {
+                        foodViewModel.addChoose(foodBean);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    try {
+                        foodViewModel.deleteChoose(foodBean);
+                    }catch (Exception e){
+
+                    }
                 }
             }
         });

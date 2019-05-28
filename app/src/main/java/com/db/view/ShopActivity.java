@@ -73,9 +73,6 @@ public class ShopActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FoodViewModel.setShopBean(shopBean);
                 Intent intent = new Intent(ShopActivity.this,FoodActivity.class);
-                intent.putExtra("shopId", shopBean.getShopId());
-                intent.putExtra("shopName", shopBean.getShopName());
-                intent.putExtra("shopAddress", shopBean.getAddress());
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
