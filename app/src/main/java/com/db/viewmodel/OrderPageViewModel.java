@@ -27,18 +27,18 @@ public class OrderPageViewModel extends ViewModel {
             }
             List<OrderBean> result = new ArrayList<OrderBean>();
             switch (input){
-                case 1:
+                case 1: // 已经下单
                     for(OrderBean orderBean:total){
-                       if(orderBean.getStatus().equals("xx")){
+                       if(orderBean.getState()==0){
                            result.add(orderBean);
                        }
                     }
                     return result;
-                case 2:
+                case 2:// 全部订单
                     return total;
-                case 3:
+                case 3://历史订单
                     for(OrderBean orderBean:total){
-                        if(orderBean.getStatus().equals("xx")){
+                        if(orderBean.getState()==2){
                             result.add(orderBean);
                         }
                     }
