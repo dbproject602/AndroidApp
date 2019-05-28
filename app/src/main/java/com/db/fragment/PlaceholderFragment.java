@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.annotation.Nullable;
 import android.support.annotation.NonNull;
@@ -13,6 +14,10 @@ import android.arch.lifecycle.ViewModelProviders;
 
 import com.example.activity.R;
 import com.db.viewmodel.OrderPageViewModel;
+
+import java.util.List;
+
+import bean.OrderBean;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -47,11 +52,11 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
-        final TextView textView = root.findViewById(R.id.section_label);
-        orderPageViewModel.getText().observe(this, new Observer<String>() {
+        final LinearLayout linearLayout  = root.findViewById(R.id.cardlayout);
+        orderPageViewModel.getOrderList().observe(this, new Observer<List<OrderBean>>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(@Nullable List<OrderBean> orderBeans) {
+
             }
         });
         return root;

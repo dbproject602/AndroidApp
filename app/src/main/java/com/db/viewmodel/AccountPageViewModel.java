@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import bean.UserBean;
 
 public class AccountPageViewModel extends ViewModel {
-    private static UserBean userBean = null;
+    private static UserBean userBean = new UserBean("null","null","null","null","null");
     public static UserBean getUserBean() {
         return userBean;
     }

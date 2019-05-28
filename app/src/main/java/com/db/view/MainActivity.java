@@ -207,7 +207,11 @@ public class MainActivity extends AppCompatActivity {
         pay = (Button) findViewById(R.id.pay);
         push = (Button) findViewById(R.id.push);
         information = (Button) findViewById(R.id.information);
-        logout = (Button) findViewById(R.id.logout);;
+        logout = (Button) findViewById(R.id.logout);
+        name.setText(AccountPageViewModel.getUserBean().getName());
+        phone.setText(AccountPageViewModel.getUserBean().getTelephone());
+        location.setText(AccountPageViewModel.getUserBean().getAddress());
+
         information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,7 +230,10 @@ public class MainActivity extends AppCompatActivity {
                     IOUtil.writeFileDataTobytes(FILENAME,null,MainActivity.this);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return;
                 }
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
