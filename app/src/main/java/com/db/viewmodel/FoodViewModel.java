@@ -38,6 +38,9 @@ public class FoodViewModel extends ViewModel {
     public void addChoose(FoodBean foodBean){
         chooseList.add(foodBean);
     }
+    public void deleteChoose(FoodBean foodBean){
+        chooseList.remove(foodBean);
+    }
     public static ShopBean getshopBean() {
         return shopBean;
     }
