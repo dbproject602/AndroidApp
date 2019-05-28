@@ -4,7 +4,6 @@ import bean.FoodBean;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderBean implements Serializable {
@@ -15,11 +14,9 @@ public class OrderBean implements Serializable {
     private Date startTime;
     private Date endTime;
     private List<FoodBean> foodItems;
-    private int state; //需要记录Order的状态，三个状态已下单，派送中，结单
     private ShopBean shopBean;
     private SenderBean senderBean;
-
-    //   保证结构统一。前端的构造器
+    private int state; //需要记录Order的状态，三个状态0已下单，1派送中，2结单
     public OrderBean( int userId, String shopId, List<FoodBean> items) {
         this.orderId = 0;
         this.userId = userId;
@@ -30,10 +27,7 @@ public class OrderBean implements Serializable {
         this.foodItems = items;
         this.state = 0;
     }
-
-    //   保证结构统一。后端的构造器
-    public OrderBean(int orderId, int userId, String shopId, int senderId, Date startTime,
-                     Date endTime, List<FoodBean> items,int state,ShopBean shopBean,SenderBean senderBean) {
+    public OrderBean(int orderId, int userId, String shopId, int senderId, Date startTime, Date endTime, List<FoodBean> items,int state, ShopBean shopBean, SenderBean senderBean) {
         this.orderId = orderId;
         this.userId = userId;
         this.shopId = shopId;
@@ -107,19 +101,11 @@ public class OrderBean implements Serializable {
         this.foodItems = foodItems;
     }
 
-    public ShopBean getShopBean() {
-        return shopBean;
-    }
+    public ShopBean getShopBean(){return shopBean;}
 
-    public void setShopBean(ShopBean shopBean) {
-        this.shopBean = shopBean;
-    }
+    public void setShopBean(ShopBean shopBean){this.shopBean = shopBean;}
 
-    public SenderBean getSenderBean() {
-        return senderBean;
-    }
+    public SenderBean getSenderBean(){return senderBean;}
 
-    public void setSenderBean(SenderBean senderBean) {
-        this.senderBean = senderBean;
-    }
+    public void setSenderBean(SenderBean senderBean){this.senderBean = senderBean;}
 }

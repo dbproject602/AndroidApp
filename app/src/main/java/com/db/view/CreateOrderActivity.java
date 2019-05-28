@@ -51,6 +51,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         for(FoodBean foodBean:CreateOrderViewModel.getFoodBeanList()){
             TextView textView = new TextView(this);
             textView.setText(foodBean.getFoodName()+"    "+"¥"+foodBean.getPrice());
+            textView.setTextSize(16);
             cardlayout.addView(textView);
         }
         backbtn.setOnClickListener(new View.OnClickListener() {

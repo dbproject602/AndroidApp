@@ -2,6 +2,7 @@ package bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SenderBean implements Serializable {
     private int senderId;
@@ -10,17 +11,25 @@ public class SenderBean implements Serializable {
     private int state; // 0 waiting 1 sending -1 resting
     private String telephone;
     private double reputation;
-    private ArrayList<Integer> shopIdItems;
+    private List<ShopBean> shopItems;
 
-    public SenderBean(int senderId, String senderName, String password,
-                      int state, String telephone, double reputation, ArrayList<Integer> shopIdItems) {
+    public SenderBean(int senderId, String senderName, String password, int state,
+                      String telephone, double reputation, List<ShopBean> shopItems) {
         this.senderId = senderId;
         this.senderName = senderName;
         this.password = password;
         this.state = state;
         this.telephone = telephone;
         this.reputation = reputation;
-        this.shopIdItems = shopIdItems;
+        this.shopItems = shopItems;
+    }
+
+    public List<ShopBean> getShopItems() {
+        return shopItems;
+    }
+
+    public void setShopItems(List<ShopBean> shopItems) {
+        this.shopItems = shopItems;
     }
 
     public int getSenderId() {
@@ -69,13 +78,5 @@ public class SenderBean implements Serializable {
 
     public void setReputation(double reputation) {
         this.reputation = reputation;
-    }
-
-    public ArrayList<Integer> getShopIdItems() {
-        return shopIdItems;
-    }
-
-    public void setShopIdItems(ArrayList<Integer> shopIdItems) {
-        this.shopIdItems = shopIdItems;
     }
 }

@@ -1,11 +1,13 @@
 package com.db.viewmodel;
 
+import android.annotation.SuppressLint;
 import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
+import android.os.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import service.OrderServiceImpl;
 public class OrderPageViewModel extends ViewModel {
 
     private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
+
     private LiveData<List<OrderBean>> orderList = Transformations.map(mIndex, new Function<Integer, List<OrderBean>>() {
         @Override
         public List<OrderBean> apply(Integer input) {
@@ -49,9 +52,21 @@ public class OrderPageViewModel extends ViewModel {
 
         }
     });
+    @SuppressLint("HandlerLeak")
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+//            orderList.postValue((List<OrderBean>) msg.obj);  //  怎么处理
+        }
+    };
     public void fetchOrderList(int userid){
         OrderService orderService = new OrderServiceImpl();
-
+        try {
+            orderService.fetchOrderList(userid,handler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void setIndex(int index) {
         mIndex.setValue(index);

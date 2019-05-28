@@ -56,7 +56,7 @@ public class CreateOrderViewModel extends ViewModel {
         CreateOrderViewModel.shopBean = shopBean;
     }
     public void submit() throws Exception {
-        OrderBean orderBean = new OrderBean(userBean.getUserId(),shopBean.getShopId(),foodBeanList);
+        OrderBean orderBean = new OrderBean(AccountPageViewModel.getUserBean().getUserId(),shopBean.getShopId(),foodBeanList);
         OrderService orderService = new OrderServiceImpl();
         orderService.addOrder(orderBean,handler);
     }

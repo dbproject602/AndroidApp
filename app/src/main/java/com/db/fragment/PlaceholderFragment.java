@@ -66,15 +66,29 @@ public class PlaceholderFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
          linearLayout  = root.findViewById(R.id.cardlayout);
-        orderPageViewModel.getOrderList().observe(this, new Observer<List<OrderBean>>() {
+
+        final Observer<List<OrderBean>> OrderObserver = new Observer<List<OrderBean>>() {
             @Override
-            public void onChanged(@Nullable List<OrderBean> orderBeans) {
-                for(OrderBean orderBean:orderBeans){
-                    generateOrderCard(orderBean);
-//                    cardlayout.addView(cardView);
+            public void onChanged(@Nullable List<OrderBean> orderBeanList) {
+
+                if (orderBeanList != null) {
+                    for(OrderBean orderBean:orderBeanList){
+                        generateOrderCard(orderBean);
+    //                    cardlayout.addView(cardView);
+                    }
+                }
+                else{
+                    System.out.println("(in Fragment) null order list");
                 }
             }
-        });
+        };
+
+        orderPageViewModel.getOrderList().observe(this,OrderObserver);
+        try {
+            orderPageViewModel.fetchOrderList(1);  // 需要传入当前user id
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return root;
     }
 

@@ -15,7 +15,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void fetchOrderList(int userId, Handler handler) throws Exception {
-        String servlet = "FetchOrderListServlet";
+        System.out.println("(debug:)fetchOrderList");
+        String servlet = "FetchOrderServlet";
         RequestBody requestBody = new FormBody.Builder().add("userid",String.valueOf(userId)).build();
         HttpManager.send(requestBody,servlet,handler);
     }
