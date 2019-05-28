@@ -104,7 +104,7 @@ public class FoodActivity extends AppCompatActivity {
         TextView price = (TextView) cardView.findViewById(R.id.price);
         price.setText("¥："+String.valueOf(foodBean.getPrice()));
         foodName.setText(foodBean.getFoodName());
-        final Button addBtn = cardView.findViewById(R.id.addBtn);
+        final ImageButton addBtn = cardView.findViewById(R.id.addBtn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {   //  添加入购物列表
