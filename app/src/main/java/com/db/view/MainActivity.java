@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -51,8 +52,10 @@ import com.example.activity.R;
 import com.db.adapter.SectionsPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import bean.FoodBean;
+import bean.ShopBean;
 import bean.UserBean;
 import util.IOUtil;
 import util.LocationManager;
@@ -74,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navView;
     private String FILENAME = "userBean.dat";
     private static int curPgae = 0;
+    private LatLng point;
     private void setpage(int pagenum){
         curPgae = pagenum;
     }
@@ -166,28 +170,44 @@ public class MainActivity extends AppCompatActivity {
         final Observer<double[]> locationObserver = new Observer<double[]>() {
             @Override
             public void onChanged(@Nullable double[] location) {
-                LatLng point = new LatLng(location[0],location[1]);
+                point = new LatLng(22.598739,114.00596);
+               // point = new LatLng(location[0],location[1]);
                 MapStatus mMapStatus = new MapStatus.Builder()
                         .target(point)
                         .zoom(16)
                         .build();
                 MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
                 //改变地图状态
-                baiduMap.setMapStatus(mMapStatusUpdate);
-                Bitmap bitmap = drawableToBitamp(getResources().getDrawable(R.drawable.icon_marka));
-                BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
-                MarkerOptions overlayOptions = new MarkerOptions().icon(icon).position(point).zIndex(15)
-                        .draggable(true);
-                Marker marker = (Marker) baiduMap.addOverlay(overlayOptions);
-                marker.setToTop();
+                try {
+                    mapPageViewModel.showShopListbyDis(point.longitude,point.latitude);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
+                baiduMap.setMapStatus(mMapStatusUpdate);
             }
         };
+        final Observer<List<ShopBean>> shoplistObserver = new Observer<List<ShopBean>>(){
+            @Override
+            public void onChanged(@Nullable List<ShopBean> shoplist) {
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.loc);
+                OverlayOptions options = null;
+                ArrayList<OverlayOptions> ops = new ArrayList<>();
+                for (ShopBean shopBean:shoplist){
+                    LatLng po = new LatLng(shopBean.getLatitude(),shopBean.getLongitude());
+                    options = new MarkerOptions().icon(icon).position(po);
+                    ops.add(options);
+                }
+                baiduMap.addOverlays(ops);
+            }
+        };
+
+
         mapPageViewModel.getLocation().observe(this,locationObserver);
+        mapPageViewModel.getShopBeanList().observe(this,shoplistObserver);
         navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(1).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        final AccountPageViewModel model = ViewModelProviders.of(this).get(AccountPageViewModel.class);
 
     }
 
