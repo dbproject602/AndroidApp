@@ -11,4 +11,9 @@ public class ShopServiceImpl implements ShopService {
     public void showShopList(int shoptype, Handler handler) throws Exception{
         shopDao.fetchShopList(shoptype,handler);
     }
+
+    @Override
+    public void showShopListbyName(String shopName, Handler handler) throws Exception {
+        shopDao.fetchShopListbyName(shopName,handler);
+    }
 }
