@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopBean implements Serializable {
-    private int shopId;
+    private String shopId;
     private String shopName;
     private String password;
     private int shopType;
@@ -19,7 +19,7 @@ public class ShopBean implements Serializable {
     private List<FoodBean> foodItems;
     private List<SenderBean> senderItems;
 
-    public ShopBean(int shopId, String shopName, String password, int shopType,
+    public ShopBean(String shopId, String shopName, String password, int shopType,
                     String telephone, String address, boolean isOpen,
                     double reputation, double sendRange, double longitude, double latitude,
                     List<FoodBean> foodItems, List<SenderBean> senderItems) {
@@ -54,11 +54,11 @@ public class ShopBean implements Serializable {
         this.senderItems = senderItems;
     }
 
-    public int getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 

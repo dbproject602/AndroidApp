@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
+import android.util.Log;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class ShopViewModel extends ViewModel {
         }
     };
     public void ShowShopList() throws Exception{
+        Log.d("debug:Shop",String.valueOf(shoptype));
         ShopService shopService = new ShopServiceImpl();
         shopService.showShopList(shoptype,handler);
     }

@@ -14,12 +14,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_gravity="right|end"
+            android:orientation="horizontal"
             android:layout_height="wrap_content">
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="2dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_home_black_24dp"
 
@@ -48,13 +55,14 @@
                     android:textColor="#FF0000"
                     android:text="价格" />
             </LinearLayout>
+        </LinearLayout>
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:orientation="vertical">
             <ImageButton
                 android:id="@+id/addBtn"
-                android:layout_width="fill_parent"
+                android:layout_width="50dp"
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:src="@drawable/plus"

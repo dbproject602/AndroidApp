@@ -7,6 +7,6 @@ import java.util.List;
 import bean.FoodBean;
 
 public interface FoodService {
-    void ShowFoodList(int shopid, Handler handler) throws Exception;
+    void ShowFoodList(String shopid, Handler handler) throws Exception;
 
 }
