@@ -31,7 +31,6 @@ public class ShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
         shopViewModel = ViewModelProviders.of(this).get(ShopViewModel.class);
-         foodViewModel = ViewModelProviders.of(this).get(FoodViewModel.class);
         cardlayout = findViewById(R.id.cardlayout);
         backbtn = findViewById(R.id.backbtn_shop);
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +70,7 @@ public class ShopActivity extends AppCompatActivity {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                foodViewModel.setshopid(shopBean.getShopId());
+                FoodViewModel.setShopBean(shopBean);
                 Intent intent = new Intent(ShopActivity.this,FoodActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,

@@ -7,16 +7,18 @@ import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
 import android.os.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.FoodBean;
+import bean.ShopBean;
 import service.FoodService;
 import service.FoodServiceImpl;
 
 public class FoodViewModel extends ViewModel {
     private MutableLiveData<List<FoodBean>> foodBeanList = new MutableLiveData<>();
-
-    private int shopid = 0;
+    private List<FoodBean> chooseList = new ArrayList<>();
+    private static ShopBean shopBean;
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
@@ -27,15 +29,21 @@ public class FoodViewModel extends ViewModel {
     };
     public void ShowFoodList() throws Exception{
         FoodService foodService = new FoodServiceImpl();
-        foodService.ShowFoodList(shopid,handler);
+        foodService.ShowFoodList(shopBean.getShopId(),handler);
 
     }
-    public int getshopid() {
-        return shopid;
+    public void submit() throws Exception{
+            CreateOrderViewModel.setFoodBeanList(chooseList);
+    }
+    public void addChoose(FoodBean foodBean){
+        chooseList.add(foodBean);
+    }
+    public static ShopBean getshopBean() {
+        return shopBean;
     }
 
-    public void setshopid(int shopid) {
-        this.shopid = shopid;
+    public static void setShopBean(ShopBean shop) {
+        shopBean = shop;
     }
 
     public LiveData<List<FoodBean>> getShopBeanList() {

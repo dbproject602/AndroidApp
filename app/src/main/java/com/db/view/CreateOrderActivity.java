@@ -15,6 +15,9 @@ import com.db.viewmodel.CreateOrderViewModel;
 import com.db.viewmodel.LoginViewModel;
 import com.example.activity.R;
 
+import bean.FoodBean;
+import bean.UserBean;
+
 public class CreateOrderActivity extends AppCompatActivity {
     private ImageButton backbtn;
     private TextView shopname;
@@ -39,6 +42,16 @@ public class CreateOrderActivity extends AppCompatActivity {
         cardlayout = (LinearLayout) findViewById(R.id.cardlayout);
         submit = (Button) findViewById(R.id.submit);
         createOrderViewModel = ViewModelProviders.of(this).get(CreateOrderViewModel.class);
+        UserBean userBean = CreateOrderViewModel.getUserBean();
+        shopname.setText(CreateOrderViewModel.getShopBean().getShopName());
+        username.setText(userBean.getName());
+        telephone.setText(userBean.getTelephone());
+        address.setText(userBean.getAddress());
+        sum.setText("¥"+createOrderViewModel.sum());
+        for(FoodBean foodBean:CreateOrderViewModel.getFoodBeanList()){
+            TextView textView = new TextView(this);
+            textView.setText(foodBean.getFoodName()+"    "+"¥"+foodBean.getPrice());
+        }
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

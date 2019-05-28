@@ -5,6 +5,9 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +37,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
@@ -158,24 +162,28 @@ public class MainActivity extends AppCompatActivity {
         locationManager.start();
         MapView mv = (MapView) findViewById(R.id.mv);
         baiduMap = mv.getMap();
-     //   BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_chevron_left_black_40dp);
-    //    OverlayOptions options = new MarkerOptions().icon(icon).position(point);
-     //   baiduMap.addOverlay(options);
+
         final Observer<double[]> locationObserver = new Observer<double[]>() {
             @Override
             public void onChanged(@Nullable double[] location) {
                 LatLng point = new LatLng(location[0],location[1]);
                 MapStatus mMapStatus = new MapStatus.Builder()
                         .target(point)
-                        .zoom(12)
+                        .zoom(16)
                         .build();
                 MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
                 //改变地图状态
                 baiduMap.setMapStatus(mMapStatusUpdate);
+                Bitmap bitmap = drawableToBitamp(getResources().getDrawable(R.drawable.icon_marka));
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                MarkerOptions overlayOptions = new MarkerOptions().icon(icon).position(point).zIndex(15)
+                        .draggable(true);
+                Marker marker = (Marker) baiduMap.addOverlay(overlayOptions);
+                marker.setToTop();
+
             }
         };
         mapPageViewModel.getLocation().observe(this,locationObserver);
-
         navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(1).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -298,4 +306,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private Bitmap drawableToBitamp(Drawable drawable)
+    {
+        int w = drawable.getIntrinsicWidth();
+        int h = drawable.getIntrinsicHeight();
+        Bitmap bitmap = Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+        return bitmap;
+    }
 }

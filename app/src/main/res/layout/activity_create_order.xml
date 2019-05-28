@@ -13,17 +13,31 @@
         android:id="@+id/back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/powderblue"
+        android:background="@color/rice"
         android:orientation="vertical">
-        <ImageButton
-            android:id="@+id/backbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_chevron_left_black_40dp"
-            android:background="#00000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_chevron_left_black_40dp"
+                android:background="#00000000"
+                />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:text="订单确认"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 
@@ -63,15 +77,6 @@
                     android:layout_height="match_parent"
                     android:background="@color/rice"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingTop="2dp"
-                        android:text="订单确认"
-                        android:textSize="20dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -220,9 +225,7 @@
                     android:id="@+id/cardlayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                </LinearLayout>
+                    android:orientation="vertical"/>
 
             </ScrollView>
         </RelativeLayout>

@@ -33,7 +33,13 @@ public class CreateOrderViewModel extends ViewModel {
     public static void setFoodBeanList(List<FoodBean> foodBeanList) {
         CreateOrderViewModel.foodBeanList = foodBeanList;
     }
-
+    public double sum(){
+        double result = 0;
+        for (FoodBean foodBean:foodBeanList){
+            result+=foodBean.getPrice();
+        }
+        return result;
+    }
     public static UserBean getUserBean() {
         return userBean;
     }
