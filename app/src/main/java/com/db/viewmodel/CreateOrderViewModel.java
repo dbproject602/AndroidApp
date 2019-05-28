@@ -60,4 +60,9 @@ public class CreateOrderViewModel extends ViewModel {
         OrderService orderService = new OrderServiceImpl();
         orderService.addOrder(orderBean,handler);
     }
+
+    public void update(OrderBean orderBean ) throws Exception {
+        OrderService orderService = new OrderServiceImpl();
+        orderService.updateOrder(orderBean,handler);
+    }
 }

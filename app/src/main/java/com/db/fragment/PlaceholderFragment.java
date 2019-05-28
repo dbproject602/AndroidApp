@@ -17,6 +17,7 @@ import android.arch.lifecycle.ViewModelProviders;
 
 import com.db.view.FoodActivity;
 import com.db.view.ShopActivity;
+import com.db.viewmodel.CreateOrderViewModel;
 import com.db.viewmodel.FoodViewModel;
 import com.example.activity.R;
 import com.db.viewmodel.OrderPageViewModel;
@@ -25,6 +26,8 @@ import java.util.List;
 
 import bean.OrderBean;
 import bean.ShopBean;
+import service.OrderService;
+import service.OrderServiceImpl;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -34,6 +37,7 @@ public class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private OrderPageViewModel orderPageViewModel;
+    private CreateOrderViewModel  createOrderViewModel;
     LinearLayout linearLayout;
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -47,6 +51,8 @@ public class PlaceholderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         orderPageViewModel = ViewModelProviders.of(this).get(OrderPageViewModel.class);
+
+        createOrderViewModel = ViewModelProviders.of(this).get(CreateOrderViewModel.class);
         int index = 1;
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
@@ -86,6 +92,12 @@ public class PlaceholderFragment extends Fragment {
             public void onClick(View v) {
                 checkbtn.setBackgroundColor(Color.parseColor("#FFA500"));
                 checkbtn.setText("已收货");
+                orderBean.setState(2);
+                try {
+                    createOrderViewModel.update(orderBean);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         linearLayout.addView(cardView);

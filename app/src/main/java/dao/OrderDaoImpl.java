@@ -27,6 +27,12 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public int updateOrder(OrderBean orderBean,Handler handler) throws Exception {
+        String servlet = "UpdateOrderServlet";
+
+        byte[] bytes = ObjToBytes.objtobytes(orderBean);
+        String encoded = Base64.getEncoder().encodeToString(bytes);
+        RequestBody requestBody = new FormBody.Builder().add("orderBean",encoded).build();
+        HttpManager.update(requestBody,servlet,handler);
         return 0;
     }
 
