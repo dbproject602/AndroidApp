@@ -16,4 +16,9 @@ public class ShopServiceImpl implements ShopService {
     public void showShopListbyName(String shopName, Handler handler) throws Exception {
         shopDao.fetchShopListbyName(shopName,handler);
     }
+
+    @Override
+    public void showShopListbyDis(double longitude, double latitude, Handler handler) throws Exception {
+        shopDao.fetchShopListbyDis(longitude,latitude,handler);
+    }
 }

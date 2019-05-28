@@ -25,4 +25,11 @@ public class ShopDaoImpl implements ShopDao {
      //   HttpManager.send(requestBody,servlet,handler);
     }
 
+    @Override
+    public void fetchShopListbyDis(double longitude, double latitude,Handler handler) {
+        String servlet = "FetchShopListByDisServlet";
+        RequestBody requestBody = new FormBody.Builder().add("longitude",String.valueOf(longitude)).add("latitude",String.valueOf(latitude)).build();
+        HttpManager.send(requestBody,servlet,handler);
+    }
+
 }
