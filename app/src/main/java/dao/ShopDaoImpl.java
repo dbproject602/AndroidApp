@@ -13,7 +13,7 @@ public class ShopDaoImpl implements ShopDao {
 
     @Override
     public void fetchShopList(int shopType,Handler handler) throws Exception {
-        String servlet = "FetchShopListServlet";
+        String servlet = "FetchShopListByTypeServlet";
         RequestBody requestBody = new FormBody.Builder().add("shoptype",String.valueOf(shopType)).build();
         HttpManager.send(requestBody,servlet,handler);
     }

@@ -31,11 +31,7 @@
         <activity
             android:name="com.db.view.LauncherActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.db.view.SafeSettingActivity" />
         <activity
@@ -54,7 +50,11 @@
             android:name="com.db.view.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service

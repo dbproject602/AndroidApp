@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Base64;
 import java.util.List;
 
 import android.os.Handler;
@@ -8,6 +9,7 @@ import bean.OrderBean;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import util.HttpManager;
+import util.ObjToBytes;
 
 public class OrderDaoImpl implements OrderDao {
 
@@ -31,7 +33,10 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public int addOrder(OrderBean orderBean,Handler handler) throws Exception {
         String servlet = "AddOrderServlet";
-        RequestBody requestBody = new FormBody.Builder().add("orderBean",String.valueOf(orderBean)).build();
+
+        byte[] bytes = ObjToBytes.objtobytes(orderBean);
+        String encoded = Base64.getEncoder().encodeToString(bytes);
+        RequestBody requestBody = new FormBody.Builder().add("orderBean",encoded).build();
         HttpManager.update(requestBody,servlet,handler);
         return 0;
     }
