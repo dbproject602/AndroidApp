@@ -115,23 +115,30 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShopViewModel.setShopname(searchView.getQuery().toString());
-                ShopViewModel.setShoptype(-1);
-                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out,
-                        R.anim.slide_in);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                              @Override
+                                              public boolean onQueryTextSubmit(String query) {
+                                                  System.out.println("check point");
+                                                  ShopViewModel.setShopname(query);
+                                                  ShopViewModel.setShoptype(-1);
+                                                  Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                                                  startActivity(intent);
+                                                  overridePendingTransition(R.anim.slide_out,
+                                                          R.anim.slide_in);
+                                                  searchView.setIconified(true);
+                                                  return true;
+                                              }
 
-            }
-        });
+                                              @Override
+                                              public boolean onQueryTextChange(String newText) {
+                                                  return false;
+                                              }
+                                          });
         china_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ShopViewModel.setShoptype(1);
-                Intent intent = new Intent(MainActivity.this,ShopActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShopActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
@@ -194,7 +201,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        mv.getParent().requestDisallowInterceptTouchEvent(true);
         final Observer<double[]> locationObserver = new Observer<double[]>() {
             @Override
             public void onChanged(@Nullable double[] location) {
