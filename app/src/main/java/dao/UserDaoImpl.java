@@ -29,7 +29,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int updateUser(UserBean userBean) throws Exception {
+    public int updateUser(UserBean userBean,Handler handler) throws Exception {
+        String servlet = "UpdateUserServlet";
+        byte[] bytes = ObjToBytes.objtobytes(userBean);
+        String str = Base64.encodeToString(bytes,Base64.DEFAULT);
+        RequestBody requestBody = new FormBody.Builder().add("userBean",str).build();
+        HttpManager.update(requestBody,servlet,handler);
         return 0;
     }
 

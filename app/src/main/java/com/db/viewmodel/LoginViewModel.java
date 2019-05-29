@@ -26,7 +26,6 @@ public class LoginViewModel extends ViewModel {
     public int login(String account, String password) throws Exception{
         UserService userService = new UserServiceImpl();
         userService.login(account,password,handler);
-
         return 0;
     }
 
