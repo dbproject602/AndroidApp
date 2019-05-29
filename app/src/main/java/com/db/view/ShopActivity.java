@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.db.viewmodel.ShopViewModel;
 import com.example.activity.R;
 
 import java.util.List;
+import java.util.Random;
 
 import bean.ShopBean;
 
@@ -67,6 +69,9 @@ public class ShopActivity extends AppCompatActivity {
     private void generateShopCard(final ShopBean shopBean) {
         View cardView = View.inflate(this, R.layout.shop_item, null);
         TextView shopName = (TextView) cardView.findViewById(R.id.shopName);
+        ImageView shopPic =  cardView.findViewById(R.id.food_photo);
+        int PicInt = randPic();
+        shopPic.setImageResource(PicInt);
         TextView rating = (TextView) cardView.findViewById(R.id.rating);
         rating.setText("评分："+String.valueOf(shopBean.getReputation()));
         shopName.setText(shopBean.getShopName());
@@ -85,6 +90,38 @@ public class ShopActivity extends AppCompatActivity {
         });
         cardlayout.addView(cardView);
 //        return cardView;
+    }
+    private int randPic(){
+        long t = System.currentTimeMillis();
+        Random rand =new Random(t);
+        int counter = (int)(1+rand.nextInt(7));
+        int picInt = 0;
+        switch (counter) {
+            case 1:
+                picInt = R.drawable.ic_1;
+                break;
+            case 2:
+                picInt = R.drawable.ic_2;
+                break;
+
+            case 3:
+                picInt = R.drawable.ic_3;
+                break;
+            case 4:
+                picInt = R.drawable.ic_1;
+                break;
+            case 5:
+                picInt = R.drawable.ic_5;
+                break;
+            case 6:
+                picInt = R.drawable.ic_6;
+                break;
+            case 7:
+                default:
+                picInt = R.drawable.ic_7;
+                break;
+        }
+        return picInt;
     }
 
 

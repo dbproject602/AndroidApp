@@ -72,20 +72,20 @@ public class FoodActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
             }
         });
-        collectBtn = findViewById(R.id.collect);
-        collectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-//                    loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
-                    collectBtn.setBackgroundColor(Color.parseColor("#FFA500"));
-                    collectBtn.setText("已收藏");
-                    //     startMain();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        collectBtn = findViewById(R.id.collect);
+//        collectBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+////                    loginViewModel.login(userNameview.getText().toString(),passwordview.getText().toString());
+//                    collectBtn.setBackgroundColor(Color.parseColor("#FFA500"));
+//                    collectBtn.setText("已收藏");
+//                    //     startMain();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
