@@ -25,6 +25,7 @@ import com.db.viewmodel.OrderPageViewModel;
 
 import java.util.List;
 
+import bean.FoodBean;
 import bean.OrderBean;
 import bean.ShopBean;
 import service.OrderService;
@@ -93,11 +94,21 @@ public class PlaceholderFragment extends Fragment {
         View cardView = View.inflate(this.getContext(), R.layout.order_item, null);
         TextView shopName = (TextView) cardView.findViewById(R.id.shopName_order);
         TextView orderId = (TextView) cardView.findViewById(R.id.id_order);
+        TextView senderName = (TextView) cardView.findViewById(R.id.sender_name);
+        TextView senderphone = (TextView) cardView.findViewById(R.id.sender_phone);
+        TextView food = (TextView) cardView.findViewById(R.id.food_list);
         orderId.setText("订单号："+String.valueOf(orderBean.getOrderId()));
         shopName.setText(orderBean.getShopBean().getShopName());
-
+        senderName.setText("派送员:"+orderBean.getSenderBean().getSenderName());
+        senderphone.setText("电话:"+orderBean.getSenderBean().getTelephone());
 //        TextView address = (TextView) cardView.findViewById(R.id.address);
 //        address.setText(shopBean.getAddress());
+        String foodStr = "食物清单:\n";
+        for(FoodBean fb : orderBean.getFoodItems()){
+            foodStr+=(fb.getFoodName()+", ");
+        }
+        foodStr = foodStr.substring(0,foodStr.length() - 2);
+        food.setText(foodStr);
         final Button checkbtn = cardView.findViewById(R.id.check_recv);
         if(orderBean.getState()==2){
             checkbtn.setBackgroundColor(Color.parseColor("#FFA500"));
