@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import android.app.AlertDialog;
+import android.widget.Toast;
+
 import com.db.viewmodel.CreateOrderViewModel;
 import com.db.viewmodel.LoginViewModel;
 import com.example.activity.R;
@@ -91,6 +93,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
+                            Toast.makeText(CreateOrderActivity.this, "下单成功！", Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
