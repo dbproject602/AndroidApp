@@ -53,7 +53,8 @@ public class FoodActivity extends AppCompatActivity {
         submit = findViewById(R.id.submit);
         shopName.setText(FoodViewModel.getshopBean().getShopName());  //直接把商家shopBean传入
         address.setText(FoodViewModel.getshopBean().getAddress());
-        phone.setText(FoodViewModel.getshopBean().getTelephone());
+        phone.setText("电话:"+FoodViewModel.getshopBean().getTelephone());
+        distant.setText("距离:"+String.valueOf(FoodViewModel.getshopBean().getSendRange())+"米");
         backbtn = findViewById(R.id.backbtn_food);
         //  检查是否收藏；收藏则变成已收藏，button失效
         submit.setOnClickListener(new View.OnClickListener() {

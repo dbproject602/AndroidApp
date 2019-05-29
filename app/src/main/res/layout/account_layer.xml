@@ -69,12 +69,12 @@
             android:paddingBottom="10dp"
             android:text="充值余额" />
 
-        <Button
-            android:id="@+id/push"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="推送设置" />
+        <!--<Button-->
+            <!--android:id="@+id/push"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:text="推送设置" />-->
 
         <Button
             android:id="@+id/information"

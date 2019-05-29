@@ -12,8 +12,8 @@
     <string name="ArroundActivity">1</string>
     <string name="OrderActivity">2</string>
     <string name="AccountActivity">3</string>
-    <string name="r_chinese">中餐馆</string>
-    <string name="r_west">西餐馆</string>
+    <string name="r_chinese">中餐</string>
+    <string name="r_west">西餐</string>
     <string name="r_fast">快餐</string>
     <string name="r_japanese">日料</string>
     <string name="app_name">DB_Project</string>

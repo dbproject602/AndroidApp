@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView money;
     private Button push;
     private Button information;
+    private Button chargeMoney;
     private Button logout;
     private BottomNavigationView navView;
     private String FILENAME = "userBean.dat";
@@ -323,8 +324,8 @@ public class MainActivity extends AppCompatActivity {
         money = (TextView) findViewById(R.id.money);
         phone = (TextView) findViewById(R.id.phone);
         pay = (Button) findViewById(R.id.pay);
-        push = (Button) findViewById(R.id.push);
-
+//        push = (Button) findViewById(R.id.push);
+        chargeMoney = (Button) findViewById(R.id.pay);
         information = (Button) findViewById(R.id.information);
         logout = (Button) findViewById(R.id.logout);
         money.setText("¥"+AccountPageViewModel.getUserBean().getMoney());
@@ -335,6 +336,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,SafeSettingActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
+            }
+        });
+        chargeMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SetmoneyActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
             }

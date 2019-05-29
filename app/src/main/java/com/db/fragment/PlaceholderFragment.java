@@ -23,6 +23,7 @@ import com.db.viewmodel.FoodViewModel;
 import com.example.activity.R;
 import com.db.viewmodel.OrderPageViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import bean.FoodBean;
@@ -91,16 +92,24 @@ public class PlaceholderFragment extends Fragment {
     }
 
     private void generateOrderCard(final OrderBean orderBean) {
-        View cardView = View.inflate(this.getContext(), R.layout.order_item, null);
+        final View cardView = View.inflate(this.getContext(), R.layout.order_item, null);
         TextView shopName = (TextView) cardView.findViewById(R.id.shopName_order);
         TextView orderId = (TextView) cardView.findViewById(R.id.id_order);
         TextView senderName = (TextView) cardView.findViewById(R.id.sender_name);
         TextView senderphone = (TextView) cardView.findViewById(R.id.sender_phone);
+        TextView orderStartTime= (TextView) cardView.findViewById(R.id.order_start_time);
+        TextView orderEndTime= (TextView) cardView.findViewById(R.id.order_end_time);
         TextView food = (TextView) cardView.findViewById(R.id.food_list);
         orderId.setText("订单号："+String.valueOf(orderBean.getOrderId()));
         shopName.setText(orderBean.getShopBean().getShopName());
         senderName.setText("派送员:"+orderBean.getSenderBean().getSenderName());
         senderphone.setText("电话:"+orderBean.getSenderBean().getTelephone());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        orderStartTime.setText("下单时间:"+sdf.format(orderBean.getStartTime()));
+        boolean finishFlag = (orderBean.getState()==2?true:false);
+        if(finishFlag){
+            orderEndTime.setText("结单时间:"+sdf.format(orderBean.getEndTime()));
+        }
 //        TextView address = (TextView) cardView.findViewById(R.id.address);
 //        address.setText(shopBean.getAddress());
         String foodStr = "食物清单:\n";
@@ -127,6 +136,9 @@ public class PlaceholderFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                ViewGroup parent = ( ViewGroup ) cardView.getParent() ;
+
+                parent.removeView ( cardView ); ;
             }
         });
         linearLayout.addView(cardView);

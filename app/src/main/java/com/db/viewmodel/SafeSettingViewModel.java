@@ -38,7 +38,7 @@ public class SafeSettingViewModel extends ViewModel {
     public static void setUserBean(UserBean user){
         userBean.setValue(user);
     }
-
+//    public UserBean getUserBean(){return userBean;};
     public void setFlag(int flag){
         this.flag.setValue(flag);
     }
