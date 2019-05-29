@@ -48,6 +48,7 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.inner.GeoPoint;
 import com.db.viewmodel.AccountPageViewModel;
+import com.db.viewmodel.FoodViewModel;
 import com.db.viewmodel.HomePageViewModel;
 import com.db.viewmodel.LoginViewModel;
 import com.db.viewmodel.MapPageViewModel;
@@ -199,10 +200,23 @@ public class MainActivity extends AppCompatActivity {
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                System.out.println("hello");
-                ShopBean shopBean = (ShopBean)marker.getExtraInfo().get("shopBean");
+                if(marker.getExtraInfo()==null){
+                    return false;
+                }
+                final ShopBean shopBean = (ShopBean)marker.getExtraInfo().get("shopBean");
                 Button location = new Button(getApplicationContext());
                 location.setText(shopBean.getShopName());
+                location.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FoodViewModel.setShopBean(shopBean);
+                        Intent intent = new Intent(MainActivity.this,FoodActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_out,
+                                R.anim.slide_in);
+                        finish();
+                    }
+                });
                 LatLng markpo = marker.getPosition();
                 InfoWindow mInfoWindow = new InfoWindow(location, markpo,-100);
                 baiduMap.showInfoWindow(mInfoWindow);
