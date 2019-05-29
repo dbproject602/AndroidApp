@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
     private void setpage(int pagenum){
         curPgae = pagenum;
     }
+    private SectionsPagerAdapter sectionsPagerAdapter = null;
+    private ViewPager viewPager = null;
+    private  TabLayout tabs = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -259,9 +262,14 @@ public class MainActivity extends AppCompatActivity {
     void init_order(){
         setpage(2);
         setContentView(R.layout.activity_order);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        viewPager = findViewById(R.id.view_pager);
+        tabs = findViewById(R.id.tabs);
         final OrderPageViewModel orderPageViewModel = ViewModelProviders.of(this).get(OrderPageViewModel.class);
         try {
+            progressBar.setVisibility(View.VISIBLE);
             orderPageViewModel.fetchOrderList(AccountPageViewModel.getUserBean().getUserId());  // 需要传入当前user id
+            System.out.println("fetch finish");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -270,11 +278,11 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<OrderBean> orderBeanList) {
 
                 if (orderBeanList != null) {
-                    SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
-                    ViewPager viewPager = findViewById(R.id.view_pager);
+                    System.out.println("Cecasdasd");
+                    sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
                     viewPager.setAdapter(sectionsPagerAdapter);
-                    TabLayout tabs = findViewById(R.id.tabs);
                     tabs.setupWithViewPager(viewPager);
+                    progressBar.setVisibility(View.GONE);
                 }
                 else{
                     System.out.println("(in Fragment) null order list");

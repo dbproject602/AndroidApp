@@ -69,8 +69,7 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
-         linearLayout  = root.findViewById(R.id.cardlayout);
-
+        linearLayout  = root.findViewById(R.id.cardlayout);
         final Observer<List<OrderBean>> OrderObserver = new Observer<List<OrderBean>>() {
             @Override
             public void onChanged(@Nullable List<OrderBean> orderBeanList) {
@@ -96,15 +95,22 @@ public class PlaceholderFragment extends Fragment {
         TextView orderId = (TextView) cardView.findViewById(R.id.id_order);
         orderId.setText("订单号："+String.valueOf(orderBean.getOrderId()));
         shopName.setText(orderBean.getShopBean().getShopName());
+
 //        TextView address = (TextView) cardView.findViewById(R.id.address);
 //        address.setText(shopBean.getAddress());
         final Button checkbtn = cardView.findViewById(R.id.check_recv);
+        if(orderBean.getState()==2){
+            checkbtn.setBackgroundColor(Color.parseColor("#FFA500"));
+            checkbtn.setText("已收货");
+            checkbtn.setActivated(false);
+        }
         checkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkbtn.setBackgroundColor(Color.parseColor("#FFA500"));
                 checkbtn.setText("已收货");
                 orderBean.setState(2);
+                checkbtn.setActivated(false);
                 try {
                     createOrderViewModel.update(orderBean);
                 } catch (Exception e) {
