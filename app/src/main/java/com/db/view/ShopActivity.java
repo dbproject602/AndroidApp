@@ -85,7 +85,6 @@ public class ShopActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
-                finish();
             }
         });
         cardlayout.addView(cardView);
