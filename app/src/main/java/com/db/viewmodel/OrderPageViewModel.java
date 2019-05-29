@@ -23,43 +23,50 @@ public class OrderPageViewModel extends ViewModel {
 
     private static MutableLiveData<List<OrderBean>> total = new MutableLiveData<>();
 
-    private LiveData<List<OrderBean>> orderList = Transformations.map(mIndex, new Function<Integer, List<OrderBean>>() {
-        @Override
-        public List<OrderBean> apply(Integer input) {
-            if (total.getValue() == null){
-                return new ArrayList<OrderBean>();
-            }
-            List<OrderBean> result = new ArrayList<OrderBean>();
-
-            switch (input){
-                case 1: // 已经下单
-                    for(OrderBean orderBean:total.getValue()){
-                       if(orderBean.getState()==0){
-                           result.add(orderBean);
-                       }
-                    }
-                    return result;
-                case 2:// 全部订单
-                    return total.getValue();
-                case 3://历史订单
-                    for(OrderBean orderBean:total.getValue()){
-                        if(orderBean.getState()==2){
-                            result.add(orderBean);
-                        }
-                    }
-                    System.out.println("size is "+result.size());
-                    return result;
-                default:
-                    return null;
-            }
-
-        }
-    });
+//    private LiveData<List<OrderBean>> orderList = Transformations.map(mIndex, new Function<Integer, List<OrderBean>>() {
+//        @Override
+//        public List<OrderBean> apply(Integer input) {
+//            if (total.getValue() == null){
+//                return new ArrayList<OrderBean>();
+//            }
+//            List<OrderBean> result = new ArrayList<OrderBean>();
+//            System.out.println("total size in model "+total.getValue().size());
+//            switch (input){
+//                case 1: // 已经下单
+//                    for(OrderBean orderBean:total.getValue()){
+//                       if(orderBean.getState()==0){
+//                           result.add(orderBean);
+//                       }
+//                    }
+//                    return result;
+//                case 2:// 全部订单
+//                    for(OrderBean orderBean:total.getValue()){
+//                        if(orderBean.getState()==0){
+//                            result.add(orderBean);
+//                        }else{
+//                            result.add(orderBean);
+//                        }
+//                    }
+//                    return result;
+//                case 3://历史订单
+//                    for(OrderBean orderBean:total.getValue()){
+//                        if(orderBean.getState()==2){
+//                            result.add(orderBean);
+//                        }
+//                    }
+//                    System.out.println("size is "+result.size());
+//                    return result;
+//                default:
+//                    return null;
+//            }
+//
+//        }
+//    });
     @SuppressLint("HandlerLeak")
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            total.setValue((List<OrderBean>) msg.obj);  //  怎么处理
+            total.postValue((List<OrderBean>) msg.obj);
         }
     };
     public void fetchOrderList(int userid){
@@ -74,9 +81,9 @@ public class OrderPageViewModel extends ViewModel {
         mIndex.setValue(index);
     }
 
-    public LiveData<List<OrderBean>> getOrderList() {
-        return orderList;
-    }
+//    public LiveData<List<OrderBean>> getOrderList() {
+//        return orderList;
+//    }
 
     public static LiveData<List<OrderBean>> getTotal() {
         return total;

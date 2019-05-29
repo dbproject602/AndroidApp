@@ -93,12 +93,18 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter sectionsPagerAdapter = null;
     private ViewPager viewPager = null;
     private  TabLayout tabs = null;
+    private ProgressBar progressBar;
+    private Observer<List<OrderBean>> orderObserver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init_order();
+        OrderPageViewModel.getTotal().observe(this,orderObserver);
         init_home();
         context = MainActivity.this;
-
+        locationManager = new LocationManager(this);
+        locationManager.registerListener(mListener);
+        locationManager.setLocationOption(locationManager.getDefaultLocationClientOption());
     }
 
 
@@ -190,18 +196,16 @@ public class MainActivity extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         setpage(1);
         setContentView(R.layout.activity_map);
+        locationManager.start();
         final ProgressBar loading = findViewById(R.id.loading);
         mapPageViewModel = ViewModelProviders.of(this).get(MapPageViewModel.class);
-        locationManager = new LocationManager(this);
-        locationManager.registerListener(mListener);
-        locationManager.setLocationOption(locationManager.getDefaultLocationClientOption());
-        locationManager.start();
         MapView mv = (MapView) findViewById(R.id.mv);
         baiduMap = mv.getMap();
 
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                System.out.println("fuck");
                 if(marker.getExtraInfo()==null){
                     return false;
                 }
@@ -277,23 +281,31 @@ public class MainActivity extends AppCompatActivity {
     void init_order(){
         setpage(2);
         setContentView(R.layout.activity_order);
-        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         viewPager = findViewById(R.id.view_pager);
         tabs = findViewById(R.id.tabs);
+        progressBar.setVisibility(View.VISIBLE);
         final OrderPageViewModel orderPageViewModel = ViewModelProviders.of(this).get(OrderPageViewModel.class);
         try {
-            progressBar.setVisibility(View.VISIBLE);
             orderPageViewModel.fetchOrderList(AccountPageViewModel.getUserBean().getUserId());  // 需要传入当前user id
             System.out.println("fetch finish");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        final Observer<List<OrderBean>> OrderObserver = new Observer<List<OrderBean>>() {
+        getSupportFragmentManager().getFragments().clear();
+        if(sectionsPagerAdapter!=null){
+            sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
+            viewPager.setAdapter(sectionsPagerAdapter);
+            tabs.setupWithViewPager(viewPager);
+            progressBar.setVisibility(View.GONE);
+        }
+
+        orderObserver = new Observer<List<OrderBean>>() {
             @Override
             public void onChanged(@Nullable List<OrderBean> orderBeanList) {
 
                 if (orderBeanList != null) {
-                    System.out.println("Cecasdasd");
+                    System.out.println("total size "+orderBeanList.size());
                     sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
                     viewPager.setAdapter(sectionsPagerAdapter);
                     tabs.setupWithViewPager(viewPager);
@@ -304,7 +316,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-        OrderPageViewModel.getTotal().observe(this,OrderObserver);
 //        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
 //        ViewPager viewPager = findViewById(R.id.view_pager);
 //        viewPager.setAdapter(sectionsPagerAdapter);
