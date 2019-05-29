@@ -214,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_out,
                                 R.anim.slide_in);
-                        finish();
                     }
                 });
                 LatLng markpo = marker.getPosition();
