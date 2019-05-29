@@ -89,8 +89,6 @@ public class FoodActivity extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FoodActivity.this,ShopActivity.class);
-                startActivity(intent);
                 overridePendingTransition(R.anim.slide_out,
                         R.anim.slide_in);
                 finish();
