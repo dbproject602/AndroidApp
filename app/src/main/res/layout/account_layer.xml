@@ -53,22 +53,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1234567" />
+                <TextView
+                    android:id="@+id/money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1234567" />
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/like"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="收藏店铺" />
 
         <Button
             android:id="@+id/pay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="支付方式" />
+            android:text="充值余额" />
 
         <Button
             android:id="@+id/push"
