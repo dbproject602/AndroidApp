@@ -113,9 +113,9 @@ public class PlaceholderFragment extends Fragment {
     }
 
     private void generateOrderCard(final OrderBean orderBean) {
-        View cardView = View.inflate(this.getContext(), R.layout.order_item, null);
+        final View cardView = View.inflate(this.getContext(), R.layout.order_item, null);
         TextView shopName = (TextView) cardView.findViewById(R.id.shopName_order);
-        TextView orderId = (TextView) cardView.findViewById(R.id.id_order);
+        final TextView orderId = (TextView) cardView.findViewById(R.id.id_order);
         TextView senderName = (TextView) cardView.findViewById(R.id.sender_name);
         TextView senderphone = (TextView) cardView.findViewById(R.id.sender_phone);
         TextView food = (TextView) cardView.findViewById(R.id.food_list);
@@ -149,6 +149,8 @@ public class PlaceholderFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                linearLayout.removeView(cardView);
+
             }
         });
         linearLayout.addView(cardView);
