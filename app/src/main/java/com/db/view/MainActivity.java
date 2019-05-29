@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -50,6 +51,7 @@ import com.db.viewmodel.AccountPageViewModel;
 import com.db.viewmodel.HomePageViewModel;
 import com.db.viewmodel.LoginViewModel;
 import com.db.viewmodel.MapPageViewModel;
+import com.db.viewmodel.OrderPageViewModel;
 import com.db.viewmodel.ShopViewModel;
 import com.example.activity.R;
 import com.db.adapter.SectionsPagerAdapter;
@@ -58,6 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.FoodBean;
+import bean.OrderBean;
 import bean.ShopBean;
 import bean.UserBean;
 import util.IOUtil;
@@ -84,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
     private void setpage(int pagenum){
         curPgae = pagenum;
     }
+    private SectionsPagerAdapter sectionsPagerAdapter = null;
+    private ViewPager viewPager = null;
+    private  TabLayout tabs = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         setpage(1);
         setContentView(R.layout.activity_map);
+        final ProgressBar loading = findViewById(R.id.loading);
         mapPageViewModel = ViewModelProviders.of(this).get(MapPageViewModel.class);
         locationManager = new LocationManager(this);
         locationManager.registerListener(mListener);
@@ -188,9 +195,11 @@ public class MainActivity extends AppCompatActivity {
         locationManager.start();
         MapView mv = (MapView) findViewById(R.id.mv);
         baiduMap = mv.getMap();
+
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                System.out.println("hello");
                 ShopBean shopBean = (ShopBean)marker.getExtraInfo().get("shopBean");
                 Button location = new Button(getApplicationContext());
                 location.setText(shopBean.getShopName());
@@ -208,10 +217,10 @@ public class MainActivity extends AppCompatActivity {
                // point = new LatLng(location[0],location[1]);
                 MapStatus mMapStatus = new MapStatus.Builder()
                         .target(point)
-                        .zoom(16)
+                        .zoom(17)
                         .build();
                 MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
-                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.self);
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.self2);
                 OverlayOptions options = new MarkerOptions().icon(icon).position(point);
                 Marker marker = (Marker) (baiduMap.addOverlay(options));
                 //改变地图状态
@@ -220,8 +229,8 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 baiduMap.setMapStatus(mMapStatusUpdate);
+                loading.setVisibility(View.GONE);
             }
         };
         final Observer<List<ShopBean>> shoplistObserver = new Observer<List<ShopBean>>(){
@@ -253,11 +262,39 @@ public class MainActivity extends AppCompatActivity {
     void init_order(){
         setpage(2);
         setContentView(R.layout.activity_order);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        viewPager = findViewById(R.id.view_pager);
+        tabs = findViewById(R.id.tabs);
+        final OrderPageViewModel orderPageViewModel = ViewModelProviders.of(this).get(OrderPageViewModel.class);
+        try {
+            progressBar.setVisibility(View.VISIBLE);
+            orderPageViewModel.fetchOrderList(AccountPageViewModel.getUserBean().getUserId());  // 需要传入当前user id
+            System.out.println("fetch finish");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        final Observer<List<OrderBean>> OrderObserver = new Observer<List<OrderBean>>() {
+            @Override
+            public void onChanged(@Nullable List<OrderBean> orderBeanList) {
+
+                if (orderBeanList != null) {
+                    System.out.println("Cecasdasd");
+                    sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
+                    viewPager.setAdapter(sectionsPagerAdapter);
+                    tabs.setupWithViewPager(viewPager);
+                    progressBar.setVisibility(View.GONE);
+                }
+                else{
+                    System.out.println("(in Fragment) null order list");
+                }
+            }
+        };
+        OrderPageViewModel.getTotal().observe(this,OrderObserver);
+//        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(MainActivity.this, getSupportFragmentManager());
+//        ViewPager viewPager = findViewById(R.id.view_pager);
+//        viewPager.setAdapter(sectionsPagerAdapter);
+//        TabLayout tabs = findViewById(R.id.tabs);
+//        tabs.setupWithViewPager(viewPager);
         navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(navView.getMenu().getItem(2).getItemId());
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -278,7 +315,6 @@ public class MainActivity extends AppCompatActivity {
         name.setText(AccountPageViewModel.getUserBean().getName());
         phone.setText(AccountPageViewModel.getUserBean().getTelephone());
         location.setText(AccountPageViewModel.getUserBean().getAddress());
-
         information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

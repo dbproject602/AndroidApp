@@ -17,6 +17,7 @@ import android.arch.lifecycle.ViewModelProviders;
 
 import com.db.view.FoodActivity;
 import com.db.view.ShopActivity;
+import com.db.viewmodel.AccountPageViewModel;
 import com.db.viewmodel.CreateOrderViewModel;
 import com.db.viewmodel.FoodViewModel;
 import com.example.activity.R;
@@ -42,6 +43,7 @@ public class PlaceholderFragment extends Fragment {
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle bundle = new Bundle();
+        System.out.println("index"+index);
         bundle.putInt(ARG_SECTION_NUMBER, index);
         fragment.setArguments(bundle);
         return fragment;
@@ -56,6 +58,8 @@ public class PlaceholderFragment extends Fragment {
         int index = 1;
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
+            System.out.println("ARG_SECTION_NUMBER is" +index );
+
         }
         orderPageViewModel.setIndex(index);
     }
@@ -65,8 +69,7 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_order, container, false);
-         linearLayout  = root.findViewById(R.id.cardlayout);
-
+        linearLayout  = root.findViewById(R.id.cardlayout);
         final Observer<List<OrderBean>> OrderObserver = new Observer<List<OrderBean>>() {
             @Override
             public void onChanged(@Nullable List<OrderBean> orderBeanList) {
@@ -74,7 +77,7 @@ public class PlaceholderFragment extends Fragment {
                 if (orderBeanList != null) {
                     for(OrderBean orderBean:orderBeanList){
                         generateOrderCard(orderBean);
-    //                    cardlayout.addView(cardView);
+                        //                    cardlayout.addView(cardView);
                     }
                 }
                 else{
@@ -82,13 +85,7 @@ public class PlaceholderFragment extends Fragment {
                 }
             }
         };
-
         orderPageViewModel.getOrderList().observe(this,OrderObserver);
-        try {
-            orderPageViewModel.fetchOrderList(1);  // 需要传入当前user id
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return root;
     }
 
@@ -98,15 +95,22 @@ public class PlaceholderFragment extends Fragment {
         TextView orderId = (TextView) cardView.findViewById(R.id.id_order);
         orderId.setText("订单号："+String.valueOf(orderBean.getOrderId()));
         shopName.setText(orderBean.getShopBean().getShopName());
+
 //        TextView address = (TextView) cardView.findViewById(R.id.address);
 //        address.setText(shopBean.getAddress());
         final Button checkbtn = cardView.findViewById(R.id.check_recv);
+        if(orderBean.getState()==2){
+            checkbtn.setBackgroundColor(Color.parseColor("#FFA500"));
+            checkbtn.setText("已收货");
+            checkbtn.setActivated(false);
+        }
         checkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkbtn.setBackgroundColor(Color.parseColor("#FFA500"));
                 checkbtn.setText("已收货");
                 orderBean.setState(2);
+                checkbtn.setActivated(false);
                 try {
                     createOrderViewModel.update(orderBean);
                 } catch (Exception e) {
