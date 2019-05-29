@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView phone;
     private Button like;
     private Button pay;
+    private TextView money;
     private Button push;
     private Button information;
     private Button logout;
@@ -319,12 +320,14 @@ public class MainActivity extends AppCompatActivity {
         accountImg = (ImageView) findViewById(R.id.account_img);
         name = (TextView) findViewById(R.id.name);
         location = (TextView) findViewById(R.id.location);
+        money = (TextView) findViewById(R.id.money);
         phone = (TextView) findViewById(R.id.phone);
-        like = (Button) findViewById(R.id.like);
         pay = (Button) findViewById(R.id.pay);
         push = (Button) findViewById(R.id.push);
+
         information = (Button) findViewById(R.id.information);
         logout = (Button) findViewById(R.id.logout);
+        money.setText("¥"+AccountPageViewModel.getUserBean().getMoney());
         name.setText(AccountPageViewModel.getUserBean().getName());
         phone.setText(AccountPageViewModel.getUserBean().getTelephone());
         location.setText(AccountPageViewModel.getUserBean().getAddress());

@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int update(UserBean userBean, Handler handler) throws Exception {
+        userDao.updateUser(userBean,handler);
         return 0;
     }
 
