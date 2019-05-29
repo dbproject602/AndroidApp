@@ -17,6 +17,7 @@ import android.arch.lifecycle.ViewModelProviders;
 
 import com.db.view.FoodActivity;
 import com.db.view.ShopActivity;
+import com.db.viewmodel.AccountPageViewModel;
 import com.db.viewmodel.CreateOrderViewModel;
 import com.db.viewmodel.FoodViewModel;
 import com.example.activity.R;
@@ -42,6 +43,7 @@ public class PlaceholderFragment extends Fragment {
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle bundle = new Bundle();
+        System.out.println("index"+index);
         bundle.putInt(ARG_SECTION_NUMBER, index);
         fragment.setArguments(bundle);
         return fragment;
@@ -56,6 +58,8 @@ public class PlaceholderFragment extends Fragment {
         int index = 1;
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);
+            System.out.println("ARG_SECTION_NUMBER is" +index );
+
         }
         orderPageViewModel.setIndex(index);
     }
@@ -74,7 +78,7 @@ public class PlaceholderFragment extends Fragment {
                 if (orderBeanList != null) {
                     for(OrderBean orderBean:orderBeanList){
                         generateOrderCard(orderBean);
-    //                    cardlayout.addView(cardView);
+                        //                    cardlayout.addView(cardView);
                     }
                 }
                 else{
@@ -82,13 +86,7 @@ public class PlaceholderFragment extends Fragment {
                 }
             }
         };
-
         orderPageViewModel.getOrderList().observe(this,OrderObserver);
-        try {
-            orderPageViewModel.fetchOrderList(1);  // 需要传入当前user id
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return root;
     }
 
